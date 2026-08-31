@@ -786,6 +786,117 @@
 
   startNonCriticalWork = loadHomeParticles;
 
+  const certificatePreview = document.querySelector('[data-certificate-preview]');
+  const certificatePreviewImage = certificatePreview?.querySelector('img');
+  const certificatePreviewCaption = certificatePreview?.querySelector('figcaption');
+  const certificateBackdrop = document.querySelector('[data-certificate-backdrop]');
+  const certificateClose = document.querySelector('[data-certificate-close]');
+  const certificateTriggers = [...document.querySelectorAll('[data-certificate]')];
+  let certificatePinned = false;
+  let activeCertificateTrigger = null;
+
+  if (certificateBackdrop && certificatePreview) {
+    document.body.append(certificateBackdrop, certificatePreview);
+  }
+
+  const updateCertificateContent = trigger => {
+    if (!certificatePreviewImage || !certificatePreviewCaption) return;
+    const title = trigger.dataset.certificateTitle || '比赛奖状';
+    certificatePreviewImage.src = trigger.dataset.certificate;
+    certificatePreviewImage.alt = `${title}图片预览`;
+    certificatePreviewCaption.textContent = title;
+  };
+
+  const positionCertificatePreview = trigger => {
+    if (!certificatePreview || certificatePinned) return;
+    const triggerBounds = trigger.getBoundingClientRect();
+    const previewBounds = certificatePreview.getBoundingClientRect();
+    const gap = 14;
+    const gutter = 16;
+    let left = triggerBounds.right + gap;
+    if (left + previewBounds.width > window.innerWidth - gutter) {
+      left = triggerBounds.left - previewBounds.width - gap;
+    }
+    left = Math.max(gutter, Math.min(left, window.innerWidth - previewBounds.width - gutter));
+    const top = Math.max(gutter, Math.min(
+      triggerBounds.top - 24,
+      window.innerHeight - previewBounds.height - gutter
+    ));
+    certificatePreview.style.left = `${left}px`;
+    certificatePreview.style.top = `${top}px`;
+  };
+
+  const showCertificateHover = trigger => {
+    if (!certificatePreview || certificatePinned) return;
+    activeCertificateTrigger = trigger;
+    updateCertificateContent(trigger);
+    certificatePreview.classList.remove('is-pinned');
+    certificatePreview.classList.add('is-visible');
+    certificatePreview.setAttribute('aria-hidden', 'false');
+    requestAnimationFrame(() => positionCertificatePreview(trigger));
+  };
+
+  const hideCertificateHover = trigger => {
+    if (!certificatePreview || certificatePinned || activeCertificateTrigger !== trigger) return;
+    certificatePreview.classList.remove('is-visible');
+    certificatePreview.setAttribute('aria-hidden', 'true');
+    activeCertificateTrigger = null;
+  };
+
+  const pinCertificate = trigger => {
+    if (!certificatePreview) return;
+    certificateTriggers.forEach(button => button.setAttribute('aria-expanded', 'false'));
+    certificatePinned = true;
+    activeCertificateTrigger = trigger;
+    updateCertificateContent(trigger);
+    trigger.setAttribute('aria-expanded', 'true');
+    certificatePreview.classList.add('is-pinned', 'is-visible');
+    certificatePreview.setAttribute('aria-hidden', 'false');
+    certificatePreview.setAttribute('role', 'dialog');
+    certificatePreview.setAttribute('aria-modal', 'true');
+    certificatePreview.setAttribute('aria-label', trigger.dataset.certificateTitle || '比赛奖状预览');
+    certificateBackdrop?.classList.add('is-visible');
+    certificateBackdrop?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    certificateClose?.focus({ preventScroll: true });
+  };
+
+  const closeCertificate = (restoreFocus = true) => {
+    if (!certificatePreview) return;
+    const previousTrigger = activeCertificateTrigger;
+    if (restoreFocus) previousTrigger?.focus({ preventScroll: true });
+    certificatePinned = false;
+    certificateTriggers.forEach(button => button.setAttribute('aria-expanded', 'false'));
+    certificatePreview.classList.remove('is-pinned', 'is-visible');
+    certificatePreview.setAttribute('aria-hidden', 'true');
+    certificatePreview.removeAttribute('role');
+    certificatePreview.removeAttribute('aria-modal');
+    certificatePreview.removeAttribute('aria-label');
+    certificateBackdrop?.classList.remove('is-visible');
+    certificateBackdrop?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    activeCertificateTrigger = null;
+  };
+
+  certificateTriggers.forEach(trigger => {
+    trigger.addEventListener('pointerenter', () => showCertificateHover(trigger));
+    trigger.addEventListener('pointerleave', () => hideCertificateHover(trigger));
+    trigger.addEventListener('focus', () => showCertificateHover(trigger));
+    trigger.addEventListener('blur', () => hideCertificateHover(trigger));
+    trigger.addEventListener('click', () => pinCertificate(trigger));
+  });
+  certificateClose?.addEventListener('click', () => closeCertificate());
+  certificateBackdrop?.addEventListener('click', () => closeCertificate());
+  window.addEventListener('resize', () => {
+    if (!certificatePinned && activeCertificateTrigger) positionCertificatePreview(activeCertificateTrigger);
+  }, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (!certificatePinned && activeCertificateTrigger) hideCertificateHover(activeCertificateTrigger);
+  }, { passive: true });
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && certificatePinned) closeCertificate();
+  });
+
   const lightbox = document.querySelector('.lightbox');
   const lightboxImage = lightbox?.querySelector('img');
   const openLightbox = source => {
@@ -872,8 +983,6 @@
   document.querySelectorAll('.modal-close').forEach(button => button.addEventListener('click', () => closeModal(button.closest('.lightbox, .video-modal'))));
   document.querySelectorAll('.lightbox, .video-modal').forEach(modal => modal.addEventListener('click', event => { if (event.target === modal) closeModal(modal); }));
   window.addEventListener('keydown', event => { if (event.key === 'Escape') document.querySelectorAll('.is-open').forEach(closeModal); });
-
-  document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
 
   const tocLinks = [...document.querySelectorAll('.page-toc a')];
   const tocSections = [...document.querySelectorAll('[data-toc]')];

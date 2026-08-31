@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="涂佳利的 Unity 客户端开发项目、Gamejam 作品、学校项目与实验室经历。">
+  <meta name="description" content="涂佳利的 Unity 客户端开发项目、GameJam 作品、学校项目与实验室经历。">
   <title>作品｜涂佳利</title>
-  <link rel="stylesheet" href="styles.css?v=20260819-2">
-  <script src="script.js?v=20260819-2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260831-3">
+  <script src="script.js?v=20260831-1" defer></script>
 </head>
 <body data-page="works">
   <div class="page-loader" role="status" aria-live="polite">
@@ -58,7 +58,7 @@
         <nav class="page-toc works-toc" aria-label="作品目录">
           <p class="page-toc-title">作品目录</p>
           <a href="#featured-work"><small>01</small><span>精选作品</span></a>
-          <a href="#gamejam-work"><small>02</small><span>Gamejam 作品</span></a>
+          <a href="#gamejam-work"><small>02</small><span>GameJam 作品</span></a>
           <a href="#school-work"><small>03</small><span>学校项目作品</span></a>
           <a href="#lab-work"><small>04</small><span>实验室经历</span></a>
         </nav>
@@ -69,6 +69,29 @@
               <p>01 / FEATURED WORK</p>
               <h2>精选作品</h2>
             </header>
+
+            <article class="works-project" id="mmorpg-project">
+              <header class="works-project-head">
+                <span>UNITY · TCP / PROTOBUF · SQL SERVER</span>
+                <h3>MMORPG 游戏 Demo</h3>
+              </header>
+
+              <div class="works-project-intro">
+                <div class="works-project-copy">
+                  <p>基于 MMORPG 教学框架进行二次开发，通过 TCP 长连接和 Protobuf 完成消息通信，使用 SQL Server、Entity Framework 持久化角色数据，并通过 Excel / JSON 管理静态配置。</p>
+                  <p>我基于现有网络和地图框架，扩展道具、背包、两类商城、29 个商品项及装备系统，完成客户端 UI、协议、服务端校验和数据库持久化闭环。通过背包副本预计算、数据库事务及失败回滚，保证金币、道具、背包布局和已穿戴装备的一致性；同时实现任务配置加载、NPC 接取 / 提交、任务追踪、奖励事务与服务端刷怪生命周期。</p>
+                  <div class="tag-row"><span>Unity</span><span>C#</span><span>Protobuf</span><span>SQL Server</span><span>Entity Framework</span></div>
+                  <div class="works-resource-list" aria-label="MMORPG 项目链接预留位置">
+                    <span><b>项目周期</b><em>2025.07 — 2026.03</em></span>
+                    <span><b>项目角色</b><em>Unity 客户端开发</em></span>
+                  </div>
+                </div>
+                <div class="works-project-video" aria-label="MMORPG 游戏 Demo 项目画面预留位置">
+                  <img src="assets/images/projects/placeholder/project-02.svg" alt="MMORPG 游戏 Demo 项目封面占位图">
+                  <div><i>◇</i><b>项目画面待补充</b><small>MMORPG DEMO / PROJECT MEDIA</small></div>
+                </div>
+              </div>
+            </article>
 
             <article class="works-project">
               <header class="works-project-head">
@@ -125,68 +148,70 @@
                 </div>
               </div>
             </article>
+
           </section>
 
           <section class="works-category" id="gamejam-work" data-toc>
             <header class="works-category-head">
               <p>02 / GAMEJAM WORK</p>
-              <h2>Gamejam 作品</h2>
+              <h2>GameJam 作品</h2>
             </header>
 
-            <article class="works-project">
+            <article class="works-project gamejam-project is-media-left" id="parenting-protocol">
               <header class="works-project-head">
-                <span>21 DAYS · TEAM PROJECT · RAPID PROTOTYPING</span>
-                <h3>21 天 Gamejam 作品集</h3>
+                <span>网易2026MINIGAMEJAM游戏开发大赛</span>
+                <h3>《育儿协议》</h3>
               </header>
 
-              <div class="works-project-intro">
+              <div class="works-project-intro works-gamejam-layout">
                 <div class="works-project-copy">
-                  <p>在限定时间内从主题拆解、玩法验证到完整交付，关注核心循环是否成立、团队协作是否顺畅，以及版本能否按期稳定落地。</p>
-                  <p>这里用于展示代表性 Gamejam 项目的玩法说明、个人职责、技术难点与复盘结论；项目名称和最终数据可在素材整理后继续补充。</p>
-                  <div class="tag-row"><span>Unity</span><span>Gamejam</span><span>玩法原型</span><span>团队协作</span></div>
-                  <div class="works-resource-list" aria-label="Gamejam 项目链接预留位置">
-                    <span><b>演示视频</b><em>链接待补充</em></span>
-                    <span><b>GitHub</b><em>地址待补充</em></span>
-                    <span><b>在线试玩</b><em>地址待补充</em></span>
+                  <h4>作品简介</h4>
+                  <p>你的蛋孵化出了一个孩子，喂食、洗澡、外出、睡觉……以俯视视角照料房间内的孩子，规划每日起居活动，关爱孩子的身心健康，与场景内物体互动，陪伴孩子成长。</p>
+                  <h4>作品介绍</h4>
+                  <p>《育儿协议》是一款以 2D 等距视角房间为舞台的互动叙事轻 Meta 养成作品。玩家以第三人称的照料者身份，在固定的生活空间里陪伴角色度过一个又一个日常：喂食、洗澡、睡觉、翻阅手册、外出，并在有限的「时间单元」内做出选择。每一次行动都会牵动状态，也会触发对话、随机事件与手册新页，最终汇向不同阶段的剧情与结局。</p>
+                  <p>游戏采用双周目结构。一周目侧重建立照料节奏与房间规则；二周目则引入捉迷藏等特殊玩法，并在最后一天走向删除、告别与致谢的完整演出。</p>
+                  <div class="tag-row" aria-label="作品类型"><span>模拟</span><span>养成</span><span>益智</span></div>
+                  <div class="works-resource-list" aria-label="《育儿协议》项目信息">
+                    <span><b>GameJam</b><em>网易2026MiniGameJam游戏开发大赛</em></span>
+                    <span><b>作品页面</b><a href="https://game.academy.163.com/event/mg2026/mg2026?workId=50337" target="_blank" rel="noopener noreferrer">前往查看 <i aria-hidden="true">↗</i></a></span>
                   </div>
                 </div>
-                <div class="works-project-video" aria-label="Gamejam 作品演示视频预留位置">
-                  <img src="assets/images/gallery/game-shot-01.svg" alt="Gamejam 作品视频封面占位图">
-                  <div><i>▶</i><b>演示视频待上传</b><small>GAMEPLAY VIDEO / 16:9</small></div>
-                </div>
+                <aside class="works-gamejam-media" aria-label="《育儿协议》演示视频位置">
+                  <div class="works-project-video" data-video-slot>
+                    <img src="assets/images/gallery/game-shot-01.svg" alt="《育儿协议》演示视频封面占位图">
+                    <div><i>▶</i><b>演示视频待上传</b><small>GAMEPLAY VIDEO / 16:9</small></div>
+                  </div>
+                  <p class="works-video-caption"><span>演示视频</span><em>16:9 · MP4 / WebM</em></p>
+                </aside>
               </div>
+            </article>
 
-              <div class="works-gallery-head">
-                <div><span>GAMEJAM GALLERY</span><h4>图片画廊</h4></div>
-                <p>记录玩法、场景与开发过程</p>
-              </div>
-              <div class="portfolio-gallery" data-gallery aria-label="Gamejam 作品图片画廊">
-                <div class="portfolio-gallery-stage">
-                  <button class="portfolio-gallery-arrow is-prev" type="button" data-gallery-prev aria-label="上一张图片">←</button>
-                  <div class="portfolio-gallery-slides">
-                    <button class="portfolio-gallery-slide" type="button" data-gallery-slide>
-                      <img src="assets/images/gallery/game-shot-01.svg" alt="Gamejam 游戏画面一">
-                      <span>核心玩法画面</span>
-                    </button>
-                    <button class="portfolio-gallery-slide" type="button" data-gallery-slide>
-                      <img src="assets/images/gallery/game-shot-02.svg" alt="Gamejam 游戏画面二">
-                      <span>关卡与交互</span>
-                    </button>
-                    <button class="portfolio-gallery-slide" type="button" data-gallery-slide>
-                      <img src="assets/images/gallery/work-photo.svg" alt="Gamejam 开发过程记录">
-                      <span>开发过程记录</span>
-                    </button>
-                  </div>
-                  <button class="portfolio-gallery-arrow is-next" type="button" data-gallery-next aria-label="下一张图片">→</button>
-                </div>
-                <div class="portfolio-gallery-footer">
-                  <p class="portfolio-gallery-counter" aria-live="polite"><b data-gallery-current>01</b><span>/</span><em data-gallery-total>03</em></p>
-                  <div class="portfolio-gallery-thumbs" aria-label="选择图片">
-                    <button type="button" data-gallery-thumb aria-label="查看核心玩法画面"><img src="assets/images/gallery/game-shot-01.svg" alt=""></button>
-                    <button type="button" data-gallery-thumb aria-label="查看关卡与交互"><img src="assets/images/gallery/game-shot-02.svg" alt=""></button>
-                    <button type="button" data-gallery-thumb aria-label="查看开发过程记录"><img src="assets/images/gallery/work-photo.svg" alt=""></button>
+            <article class="works-project gamejam-project is-media-right" id="mingwan-72-hours">
+              <header class="works-project-head">
+                <span>金海豚X好游快爆游戏开发大赛</span>
+                <h3>《明湾72小时》</h3>
+              </header>
+
+              <div class="works-project-intro works-gamejam-layout">
+                <div class="works-project-copy">
+                  <h4>作品简介</h4>
+                  <p>《明湾72h》是一款桌面模拟叙事解谜游戏。玩家化身智慧城市平台夜班质检员，在 72 小时内审阅 AI 工单、搜集证据并作出选择，逐步揭开“已解决”背后的系统真相。</p>
+                  <h4>作品介绍</h4>
+                  <p>游戏背景设定在虚构智慧城市「明湾」，居民通过「明湾通」提交各类生活诉求，AI 先行处理，复杂案例则转交人工。然而系统给你的任务并不简单，随着夜班推进，你会逐渐发现，自己或许并非来帮居民伸张正义，而是来签字确认一场名为 AUTO-CLEAR 的历史异常清理——把无法分类的旧工单统统标记为「已解决」。</p>
+                  <p>游戏核心玩法围绕「后台工单处理模拟 + 证据推理 + 叙事选择」展开多分支叙事。十起彼此关联的居民事件、风险值与倒计时共同制造压力，玩家的查证、转人工或快速关单都会影响最终对峙与四种结局，并追问：系统停止回应，真的等于问题被解决了吗？</p>
+                  <div class="tag-row" aria-label="作品类型"><span>悬疑</span><span>推理</span><span>文字</span></div>
+                  <div class="works-resource-list" aria-label="《明湾72小时》项目信息">
+                    <span><b>GameJam</b><em>金海豚X好游快爆游戏开发大赛</em></span>
+                    <span><b>作品页面</b><a href="https://www.3839.com/a/200302.htm" target="_blank" rel="noopener noreferrer">前往查看 <i aria-hidden="true">↗</i></a></span>
                   </div>
                 </div>
+                <aside class="works-gamejam-media" aria-label="《明湾72小时》演示视频位置">
+                  <div class="works-project-video" data-video-slot>
+                    <img src="assets/images/gallery/game-shot-02.svg" alt="《明湾72小时》演示视频封面占位图">
+                    <div><i>▶</i><b>演示视频待上传</b><small>GAMEPLAY VIDEO / 16:9</small></div>
+                  </div>
+                  <p class="works-video-caption"><span>演示视频</span><em>16:9 · MP4 / WebM</em></p>
+                </aside>
               </div>
             </article>
           </section>

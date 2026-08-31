@@ -6,8 +6,8 @@
   <meta name="description" content="涂佳利的 Unity 客户端开发作品集，展示游戏项目、工程实践与个人经历。">
   <meta name="theme-color" content="#ffffff">
   <title>涂佳利｜Unity 客户端开发</title>
-  <link rel="stylesheet" href="styles.css?v=20260819-2">
-  <script src="script.js?v=20260819-2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260831-1">
+  <script src="script.js?v=20260831-1" defer></script>
 </head>
 <body data-page="home">
   <div class="page-loader" role="status" aria-live="polite">
@@ -64,9 +64,9 @@
         </div>
         <p class="hero-role">UNITY CLIENT DEVELOPER</p>
         <div class="hero-copy">
-          <p class="hero-intro">你好，我是涂佳利，一名面向校招的 Unity 客户端开发者。关注玩法系统、DOTS 高性能实践与 AI 驱动的工程效率。</p>
+          <p class="hero-intro">你好，我是涂佳利，一名 27 届应届生。性格开朗随和，喜欢探索新鲜事物，平时热爱游戏，也享受把兴趣变成作品的过程。</p>
           <div class="hero-meta">
-            <span>本科应届生</span>
+            <span>27 届应届生</span>
             <span>Unity / C# / ECS</span>
           </div>
           <div class="hero-actions">
@@ -95,6 +95,21 @@
               <h2>01 · 精选作品</h2>
             </header>
             <article class="work-feature">
+              <h2>MMORPG 游戏 Demo</h2>
+              <div class="work-split">
+                <div class="work-copy">
+                  <p class="work-meta">2025.07 — 2026.03 · Unity 客户端开发</p>
+                  <p>基于 MMORPG 教学框架二次开发，通过 TCP 长连接和 Protobuf 完成消息通信，使用 SQL Server、Entity Framework 持久化角色数据，并以 Excel / JSON 管理静态配置。</p>
+                  <p>扩展道具、背包、两类商城、29 个商品项及装备系统，完成客户端 UI、协议、服务端校验和数据库持久化闭环，并实现任务、刷怪与基础社交等多人在线 RPG 功能。</p>
+                  <div class="tag-row"><span>Unity</span><span>C#</span><span>Protobuf</span><span>SQL Server</span></div>
+                  <a class="button primary" href="works.html#mmorpg-project">查看作品详情</a>
+                </div>
+                <div class="work-video is-empty">
+                  <img src="assets/images/projects/placeholder/project-02.svg" alt="MMORPG 游戏 Demo 项目封面占位图">
+                </div>
+              </div>
+            </article>
+            <article class="work-feature">
               <h2>DOTS 骨骼动画测试 Demo</h2>
               <div class="work-split">
                 <div class="work-copy">
@@ -108,24 +123,6 @@
                   <img src="assets/images/projects/dots/video-poster.svg" alt="DOTS 骨骼动画 Demo 视频封面">
                   <video controls muted playsinline preload="none" poster="assets/images/projects/dots/video-poster.svg" aria-label="DOTS 骨骼动画测试 Demo 演示视频">
                     <source src="assets/videos/dots-demo.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </div>
-            </article>
-            <article class="work-feature">
-              <h2>帧同步 Demo</h2>
-              <div class="work-split">
-                <div class="work-copy">
-                  <p class="work-meta">2026.03 — 2026.06 · Unity 客户端 · 独立开发</p>
-                  <p>基于帧同步的 MOBA 多人对战 Demo，包含玩家登录匹配、自定义物理引擎、普攻与技能系统、录像回放、断线重连和网络延迟优化。</p>
-                  <p>我独立完成客户端与服务器，基于 TCP / UDP 与 Protobuf 搭建通信框架和帧同步核心逻辑，并实现自定义物理碰撞检测与战斗系统。</p>
-                  <div class="tag-row"><span>Unity</span><span>C#</span><span>帧同步</span><span>Protobuf</span></div>
-                  <a class="button primary" href="project-framesync.html">查看作品详情</a>
-                </div>
-                <div class="work-video">
-                  <img src="assets/images/projects/framesync/video-poster.svg" alt="帧同步 Demo 视频封面">
-                  <video controls muted playsinline preload="none" poster="assets/images/projects/framesync/video-poster.svg" aria-label="帧同步 Demo 演示视频">
-                    <source src="assets/videos/framesync-demo.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -144,10 +141,9 @@
                 <p>杭州</p>
               </div>
               <ul>
-                <li>参与 Unity 战斗系统 Lua→C# 重构，结合 AI 辅助调用链与资产依赖分析，完成 11 条主动技能的 C# Runtime 迁移；独立完成 Attack、Bullet、对象池、Prefab 与 Luban 配置链路。</li>
-                <li>批量推进战斗 Buff 系统迁移，独立完成 57 个原生 Buff Runtime，覆盖控制、护盾 / 无敌、伤害与暴击修正、受击触发及技能联动；统一生命周期、叠层、事件 Hook 和资源清理机制。</li>
-                <li>使用 AI Agent 与 Unity MCP 辅助调用链梳理、资产引用核验、代码审查和测试补全，建立配置驱动的 Buff 创建与验证链路，完成 79 条有效配置与 71 个 C# Runtime Factory。</li>
-                <li>设计 native-first / Lua-fallback 兼容方案，保障 Lua Enemy、旧存档和未迁移模块平滑运行；修复对象池回收后引用残留，并完成战斗暂停、退出重进和对象清理回归。</li>
+                <li>参与 Unity 战斗系统 Lua 到 C# 渐进式重构，独立完成 Fighter Jet、ZapMaster、Radiation Orb 及 Drone 版本迁移，覆盖攻击、弹体、属性、Prefab、对象池、升级 Action 与 Luban 配置链。</li>
+                <li>推进 Buff 系统配置驱动改造，完成 79 条 Buff 配置及 11 条主动配件技能的原生 Runtime 迁移与验收。</li>
+                <li>建设技能 / Buff 测试与迁移验收流程，结合 Debug、UnityMCP、PlayMode 探针和资产扫描验证配置、行为、叠层、清理、暂停及战斗重进，持续修复 Boss、双人模式、技能、特效和战斗 UI 等迁移回归问题。</li>
               </ul>
             </article>
           </section>
@@ -160,17 +156,18 @@
               <article class="home-skill-group">
                 <h3>开发技术</h3>
                 <ul>
-                  <li><b>计算机基础：</b>熟悉 C#、Lua 和面向对象编程，掌握数据结构与算法；熟悉计算机操作系统、计算机网络。</li>
-                  <li><b>程序设计：</b>熟悉常见游戏设计模式，了解 DOTween、Unity ECS 开源框架等。</li>
-                  <li><b>工具部分：</b>熟悉 Unity 引擎、Git、Protobuf、Beyond Compare 等开发工具。</li>
-                  <li><b>Unity 开发：</b>熟悉 Unity 组件与 Prefab 工作流、对象池、事件系统、DOTween；了解 Shader、GPU Instancing；具有 DOTS/ECS 系统和 Editor 工具开发经验。</li>
+                  <li><b>编程基础：</b>熟悉 C#、Lua 及面向对象编程，掌握数据结构与算法；熟悉计算机操作系统、计算机网络基础。</li>
+                  <li><b>程序设计：</b>熟悉常见游戏设计模式，了解 DoTween、Unity ECS 开源框架等。</li>
+                  <li><b>数据库与配置：</b>熟悉 SQL Server、Entity Framework、EDMX 映射及数据库事务；了解 Excel 转 JSON 的配置驱动流程。</li>
+                  <li><b>Unity 开发：</b>熟悉 Unity UGUI、Prefab、Resources、场景管理及组件生命周期；了解对象池、事件系统、Shader、GPU Instancing；具有 DOTS / ECS 系统和 Editor 工具开发经验。</li>
+                  <li><b>工程能力：</b>熟悉 Unity 引擎、Git、Protobuf、Beyond Compare 等开发工具。</li>
                 </ul>
               </article>
               <article class="home-skill-group">
                 <h3>AI 技术应用</h3>
                 <ul>
                   <li>掌握 Prompt 工程和优化技巧，能利用 Cursor / Claude Code / Codex 等 AI 编程工具高效开发，掌握 MCP Server 和 Agent Skills 等工具。</li>
-                  <li>熟悉 Vibe Coding、SDD、Harness Engineering 等多种 AI 编程模式，能利用 OpenSpec 等工具驱动 AI 完成项目。</li>
+                  <li>熟悉 Vibe Coding、Harness Engineering 等多种 AI 编程模式，能利用 OpenSpec 等工具驱动 AI 完成项目。</li>
                 </ul>
               </article>
             </div>
@@ -183,61 +180,101 @@
             <ol class="award-timeline">
               <li>
                 <time datetime="2026-05">2026.05</time>
-                <div>
-                  <h3>21 天 Gamejam 游戏开发大赛</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>21 天 Gamejam 游戏开发大赛</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="21 天 Gamejam 游戏开发大赛奖状" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>参加三次，从零搭项目并落地。</p>
                 </div>
               </li>
               <li>
                 <time datetime="2025-12">2025.12</time>
-                <div>
-                  <h3>第十一届全国应用型人才综合技能大赛</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>第十一届全国应用型人才综合技能大赛</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="第十一届全国应用型人才综合技能大赛奖状" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>国家三等奖</p>
                 </div>
               </li>
               <li>
                 <time datetime="2025-12">2025.12</time>
-                <div>
-                  <h3>第十九届全国三维数字化创新设计大赛「龙鼎奖」</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>第十九届全国三维数字化创新设计大赛「龙鼎奖」</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="第十九届全国三维数字化创新设计大赛「龙鼎奖」奖状" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>省级一等奖</p>
                 </div>
               </li>
               <li>
                 <time datetime="2025-10">2025.10</time>
-                <div>
-                  <h3>中国国际大学生创新大赛（原互联网+）</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>中国国际大学生创新大赛（原互联网+）</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="中国国际大学生创新大赛奖状" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>省级铜奖</p>
                 </div>
               </li>
               <li>
                 <time datetime="2025-08">2025.08</time>
-                <div>
-                  <h3>未来设计师：全国高校数字艺术设计大赛</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>未来设计师：全国高校数字艺术设计大赛</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="未来设计师：全国高校数字艺术设计大赛奖状" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
+                  <p>省级二等奖</p>
+                </div>
+              </li>
+              <li>
+                <time datetime="2025-05">2025.05</time>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>南方测绘杯“无人机航空摄影测量”线下比赛</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="南方测绘杯“无人机航空摄影测量”线下比赛奖状" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>省级二等奖</p>
                 </div>
               </li>
               <li>
                 <time datetime="2024-12">2024.12</time>
-                <div>
-                  <h3>手部点云压编及骨架线提取压编</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>手部点云压编及骨架线提取压编</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="手部点云压编及骨架线提取压编证书" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>计算机软件著作权</p>
                 </div>
               </li>
               <li>
                 <time datetime="2024-12">2024.12</time>
-                <div>
-                  <h3>第十八届全国三维数字化创新设计大赛「龙鼎奖」</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>第十八届全国三维数字化创新设计大赛「龙鼎奖」</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="第十八届全国三维数字化创新设计大赛「龙鼎奖」奖状" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>国家三等奖</p>
                 </div>
               </li>
               <li>
                 <time datetime="2024-11">2024.11</time>
-                <div>
-                  <h3>三维手语建模研究</h3>
+                <div class="award-content">
+                  <div class="award-heading">
+                    <h3>三维手语建模研究</h3>
+                    <button class="certificate-trigger" type="button" data-certificate="assets/images/certificates/certificate-placeholder.svg" data-certificate-title="三维手语建模研究证书" aria-haspopup="dialog" aria-expanded="false">查看奖状 <span aria-hidden="true">↗</span></button>
+                  </div>
                   <p>学术论文</p>
                 </div>
               </li>
             </ol>
+            <div class="certificate-backdrop" data-certificate-backdrop aria-hidden="true"></div>
+            <figure class="certificate-preview" data-certificate-preview aria-hidden="true">
+              <button class="certificate-close" type="button" data-certificate-close aria-label="关闭奖状预览">×</button>
+              <img src="assets/images/certificates/certificate-placeholder.svg" alt="奖状图片占位预览">
+              <figcaption>奖状预览</figcaption>
+            </figure>
           </section>
         </div>
       </div>

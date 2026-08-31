@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title description">
+  <title id="title">奖状图片占位</title>
+  <desc id="description">用于作品集比赛经历区域的奖状图片占位图</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#f5f0e5"/>
+    </linearGradient>
+    <pattern id="grain" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="7" r="1" fill="#6b5c83" opacity=".05"/>
+      <circle cx="18" cy="15" r="1" fill="#6b5c83" opacity=".035"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="760" rx="34" fill="url(#paper)"/>
+  <rect width="1200" height="760" rx="34" fill="url(#grain)"/>
+  <rect x="34" y="34" width="1132" height="692" rx="24" fill="none" stroke="#75658e" stroke-width="2" opacity=".65"/>
+  <rect x="52" y="52" width="1096" height="656" rx="18" fill="none" stroke="#c8bca4"/>
+  <path d="M70 175h250M880 175h250M70 585h250M880 585h250" stroke="#75658e" stroke-width="2" opacity=".32"/>
+  <circle cx="600" cy="178" r="52" fill="#75658e" opacity=".1"/>
+  <path d="M579 178l14 14 30-34" fill="none" stroke="#75658e" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <text x="600" y="302" fill="#40384d" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="70" font-weight="700" text-anchor="middle">奖状图片占位</text>
+  <text x="600" y="364" fill="#756d7e" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="25" text-anchor="middle" letter-spacing="5">CERTIFICATE PREVIEW</text>
+  <path d="M390 414h420" stroke="#c8bca4" stroke-width="2"/>
+  <text x="600" y="482" fill="#867c8e" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="25" text-anchor="middle">请将此图片替换为对应比赛的奖状</text>
+  <circle cx="600" cy="592" r="55" fill="#75658e" opacity=".12"/>
+  <circle cx="600" cy="592" r="41" fill="none" stroke="#75658e" stroke-width="2" opacity=".6"/>
+  <text x="600" y="603" fill="#75658e" font-family="Georgia, serif" font-size="32" font-weight="700" text-anchor="middle">TU</text>
+</svg>
