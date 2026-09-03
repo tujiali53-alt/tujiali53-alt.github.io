@@ -550,11 +550,32 @@
     const showPreviousJourneySlide = () => showJourneySlide(galleryIndex - 1, -1);
     const showNextJourneySlide = () => showJourneySlide(galleryIndex + 1, 1);
     const refreshJourneyGallery = () => showJourneySlide(galleryIndex, 1, true);
+    const journeyImageCleanup = [];
+    gallerySlides.forEach((slide, index) => {
+      const image = slide.querySelector('img');
+      if (!image) return;
+      const openJourneyImage = () => openLightbox(image);
+      const openJourneyImageWithKeyboard = event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openJourneyImage();
+      };
+      slide.tabIndex = 0;
+      slide.setAttribute('role', 'button');
+      slide.setAttribute('aria-label', `点击放大查看第 ${String(index + 1).padStart(2, '0')} 张沿途影像`);
+      slide.addEventListener('click', openJourneyImage);
+      slide.addEventListener('keydown', openJourneyImageWithKeyboard);
+      journeyImageCleanup.push(() => {
+        slide.removeEventListener('click', openJourneyImage);
+        slide.removeEventListener('keydown', openJourneyImageWithKeyboard);
+      });
+    });
     galleryPrev?.addEventListener('click', showPreviousJourneySlide);
     galleryNext?.addEventListener('click', showNextJourneySlide);
     window.addEventListener('resize', refreshJourneyGallery, { passive: true });
     window.addEventListener('pagehide', () => {
       galleryTimeline?.kill();
+      journeyImageCleanup.forEach(cleanup => cleanup());
       galleryPrev?.removeEventListener('click', showPreviousJourneySlide);
       galleryNext?.removeEventListener('click', showNextJourneySlide);
       window.removeEventListener('resize', refreshJourneyGallery);
@@ -1005,10 +1026,84 @@
     });
   }
 
-  document.querySelectorAll('.work-video video').forEach(video => {
-    const stage = video.parentElement;
-    const fail = () => stage?.classList.add('is-empty');
-    video.addEventListener('error', fail);
-    video.querySelector('source')?.addEventListener('error', fail);
+  document.querySelectorAll('.bilibili-video').forEach(stage => {
+    const bvid = stage.dataset.bvid;
+    if (!bvid) return;
+    const title = stage.dataset.videoTitle || '项目演示视频';
+    const poster = stage.querySelector('.bilibili-poster');
+    const trigger = stage.querySelector('.bilibili-video-trigger');
+    let iframe = null;
+    let mode = 'idle';
+
+    // 优先使用 Bilibili 官方接口返回的真实视频封面；接口不可用时保留本地渐变封面。
+    if (poster) {
+      const applyCover = payload => {
+        const cover = payload?.code === 0 ? payload.data?.pic : '';
+        if (!cover || !/^https?:\/\//i.test(cover)) return;
+        poster.style.backgroundImage = `url("${cover.replace(/"/g, '%22')}")`;
+        poster.classList.add('has-image');
+      };
+      const callbackName = `__biliCover_${bvid.replace(/[^a-z0-9]/gi, '')}_${Math.random().toString(36).slice(2)}`;
+      const coverScript = document.createElement('script');
+      const cleanup = () => { window[callbackName] = null; coverScript.remove(); };
+      window[callbackName] = payload => { applyCover(payload); cleanup(); };
+      coverScript.src = `https://api.bilibili.com/x/web-interface/view?bvid=${encodeURIComponent(bvid)}&jsonp=jsonp&callback=${callbackName}`;
+      coverScript.onerror = cleanup;
+      document.head.appendChild(coverScript);
+      window.setTimeout(cleanup, 5000);
+    }
+
+    const createPlayer = (playWithSound, shouldAutoplay = true) => {
+      if (iframe) iframe.remove();
+      iframe = document.createElement('iframe');
+      const params = new URLSearchParams({
+        bvid,
+        page: '1',
+        high_quality: '1',
+        danmaku: '0',
+        autoplay: shouldAutoplay ? '1' : '0',
+        muted: playWithSound ? '0' : '1'
+      });
+      iframe.src = `https://player.bilibili.com/player.html?${params.toString()}`;
+      iframe.title = title;
+      iframe.loading = 'lazy';
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      stage.appendChild(iframe);
+    };
+
+    const enterPreview = () => {
+      if (mode !== 'idle') return;
+      mode = 'preview';
+      createPlayer(false, true);
+      stage.classList.add('is-preview');
+    };
+
+    const startPlayback = event => {
+      event?.preventDefault();
+      event?.stopPropagation();
+      mode = 'playing';
+      createPlayer(true, true);
+      stage.classList.remove('is-preview');
+      stage.classList.add('is-playing');
+    };
+
+    const resetPreview = () => {
+      if (mode !== 'preview') return;
+      mode = 'idle';
+      createPlayer(false, false);
+      stage.classList.remove('is-preview');
+    };
+
+    stage.addEventListener('mouseenter', enterPreview);
+    stage.addEventListener('mouseleave', resetPreview);
+    trigger?.addEventListener('click', startPlayback);
+    trigger?.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') startPlayback(event);
+    });
+
+    // 静止状态保留 Bilibili 播放器封面，不自动播放。
+    createPlayer(false, false);
   });
 })();

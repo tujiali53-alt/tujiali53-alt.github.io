@@ -30,12 +30,13 @@ SVG 占位图改成 JPG、PNG 或 WebP 时，需要同时修改 HTML 中相应�
 
 ## 替换本地视频
 
-当前初稿显示视频封面和弹窗占位信息。上传视频后，把弹窗中的 `.video-stage` 内容改成：
+作品页的视频位已接入 Bilibili 按需播放器。每个 `.bilibili-video` 通过 `data-bvid` 指定视频：未悬浮时只显示封面，悬浮时加载静音预览，点击后切换为有声播放并支持全屏。
 
 ```html
-<video controls muted playsinline preload="metadata" poster="assets/images/projects/dots/video-poster.webp">
-  <source src="assets/videos/dots-demo.mp4" type="video/mp4">
-</video>
+<div class="works-project-video bilibili-video" data-bvid="BV1iZomBMEGv" data-video-title="DOTS 骨骼动画测试 Demo">
+  <div class="bilibili-poster poster-dots">...</div>
+  <button class="bilibili-video-trigger" type="button">悬浮预览 · 点击播放</button>
+</div>
 ```
 
 ## 启用正式简历下载
