@@ -808,11 +808,13 @@
   startNonCriticalWork = loadHomeParticles;
 
   const certificatePreview = document.querySelector('[data-certificate-preview]');
-  const certificatePreviewImage = certificatePreview?.querySelector('img');
+  const certificateMedia = certificatePreview?.querySelector('[data-certificate-media]');
+  const certificateStatus = certificateMedia?.querySelector('[role="status"]');
   const certificatePreviewCaption = certificatePreview?.querySelector('figcaption');
   const certificateBackdrop = document.querySelector('[data-certificate-backdrop]');
   const certificateClose = document.querySelector('[data-certificate-close]');
   const certificateTriggers = [...document.querySelectorAll('[data-certificate]')];
+  const certificateImages = new Map();
   let certificatePinned = false;
   let activeCertificateTrigger = null;
 
@@ -820,13 +822,35 @@
     document.body.append(certificateBackdrop, certificatePreview);
   }
 
-  const updateCertificateContent = trigger => {
-    if (!certificatePreviewImage || !certificatePreviewCaption) return;
-    const title = trigger.dataset.certificateTitle || '比赛奖状';
-    certificatePreviewImage.src = trigger.dataset.certificate;
-    certificatePreviewImage.alt = `${title}图片预览`;
-    certificatePreviewCaption.textContent = title;
+  const loadCertificate = (trigger, priority) => {
+    const url = trigger.dataset.certificate;
+    const cached = certificateImages.get(url);
+    if (cached) {
+      if (priority === 'high') cached.image.fetchPriority = 'high';
+      return cached.ready;
+    }
+
+    const image = new Image();
+    image.fetchPriority = priority;
+    image.src = url;
+    const ready = image.decode().then(() => image, () => {
+      certificateImages.delete(url);
+      return null;
+    });
+    certificateImages.set(url, { image, ready });
+    return ready;
   };
+
+  if (certificateTriggers.length && 'IntersectionObserver' in window) {
+    const certificateObserver = new IntersectionObserver(entries => {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (!isIntersecting) return;
+        certificateObserver.unobserve(target);
+        loadCertificate(target, 'low');
+      });
+    }, { rootMargin: '280px 0px' });
+    certificateTriggers.forEach(trigger => certificateObserver.observe(trigger));
+  }
 
   const positionCertificatePreview = trigger => {
     if (!certificatePreview || certificatePinned) return;
@@ -847,16 +871,6 @@
     certificatePreview.style.top = `${top}px`;
   };
 
-  const showCertificateHover = trigger => {
-    if (!certificatePreview || certificatePinned) return;
-    activeCertificateTrigger = trigger;
-    updateCertificateContent(trigger);
-    certificatePreview.classList.remove('is-pinned');
-    certificatePreview.classList.add('is-visible');
-    certificatePreview.setAttribute('aria-hidden', 'false');
-    requestAnimationFrame(() => positionCertificatePreview(trigger));
-  };
-
   const hideCertificateHover = trigger => {
     if (!certificatePreview || certificatePinned || activeCertificateTrigger !== trigger) return;
     certificatePreview.classList.remove('is-visible');
@@ -864,12 +878,41 @@
     activeCertificateTrigger = null;
   };
 
+  const showCertificateImage = async trigger => {
+    if (!certificateMedia || !certificateStatus || !certificatePreviewCaption) return;
+    const title = trigger.dataset.certificateTitle || '比赛奖状';
+    const previousImage = certificateMedia.querySelector('img');
+    if (previousImage?.getAttribute('src') !== trigger.dataset.certificate) previousImage?.remove();
+    certificatePreviewCaption.textContent = title;
+    certificateStatus.hidden = Boolean(certificateMedia.querySelector('img')) || !certificatePinned;
+    certificateStatus.textContent = certificateStatus.hidden ? '' : '正在加载图片…';
+
+    const image = await loadCertificate(trigger, 'high');
+    if (activeCertificateTrigger !== trigger) return;
+    if (!image) {
+      if (certificatePinned) certificateStatus.textContent = '图片加载失败，请关闭后重试。';
+      return;
+    }
+
+    image.alt = `${title}图片预览`;
+    certificateStatus.hidden = true;
+    certificateMedia.append(image);
+    if (!certificatePinned) positionCertificatePreview(trigger);
+    certificatePreview.classList.add('is-visible');
+    certificatePreview.setAttribute('aria-hidden', 'false');
+  };
+
+  const showCertificateHover = trigger => {
+    if (!certificatePreview || certificatePinned) return;
+    activeCertificateTrigger = trigger;
+    showCertificateImage(trigger);
+  };
+
   const pinCertificate = trigger => {
     if (!certificatePreview) return;
     certificateTriggers.forEach(button => button.setAttribute('aria-expanded', 'false'));
     certificatePinned = true;
     activeCertificateTrigger = trigger;
-    updateCertificateContent(trigger);
     trigger.setAttribute('aria-expanded', 'true');
     certificatePreview.classList.add('is-pinned', 'is-visible');
     certificatePreview.setAttribute('aria-hidden', 'false');
@@ -880,6 +923,7 @@
     certificateBackdrop?.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     certificateClose?.focus({ preventScroll: true });
+    showCertificateImage(trigger);
   };
 
   const closeCertificate = (restoreFocus = true) => {
@@ -919,9 +963,9 @@
   });
 
   const lightbox = document.querySelector('.lightbox');
-  const lightboxImage = lightbox?.querySelector('img');
   const openLightbox = source => {
-    if (!lightbox || !lightboxImage || !source) return;
+    if (!lightbox || !source) return;
+    const lightboxImage = lightbox.querySelector('img') || lightbox.appendChild(new Image());
     lightboxImage.src = source.src;
     lightboxImage.alt = source.alt;
     lightbox.classList.add('is-open');
@@ -1120,35 +1164,53 @@
     window.addEventListener('scroll', positionPreview, { passive: true });
   }
 
+  const loadBilibiliCover = stage => {
+    const bvid = stage.dataset.bvid;
+    const poster = stage.querySelector('.bilibili-poster');
+    if (!bvid || !poster) return;
+
+    const callbackName = `__biliCover_${bvid.replace(/[^a-z0-9]/gi, '')}_${Math.random().toString(36).slice(2)}`;
+    const coverScript = document.createElement('script');
+    const cleanup = () => {
+      window.clearTimeout(timeout);
+      window[callbackName] = null;
+      coverScript.remove();
+    };
+    window[callbackName] = payload => {
+      const cover = payload?.code === 0 ? payload.data?.pic : '';
+      if (cover && /^https?:\/\//i.test(cover)) {
+        poster.style.backgroundImage = `url("${cover.replace(/"/g, '%22')}")`;
+        poster.classList.add('has-image');
+      }
+      cleanup();
+    };
+    coverScript.src = `https://api.bilibili.com/x/web-interface/view?bvid=${encodeURIComponent(bvid)}&jsonp=jsonp&callback=${callbackName}`;
+    coverScript.onerror = cleanup;
+    const timeout = window.setTimeout(cleanup, 5000);
+    document.head.appendChild(coverScript);
+  };
+
+  const coverObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    entries.forEach(({ isIntersecting, target }) => {
+      if (!isIntersecting) return;
+      coverObserver.unobserve(target);
+      loadBilibiliCover(target);
+    });
+  }, { rootMargin: '160px 0px' }) : null;
+
   document.querySelectorAll('.bilibili-video').forEach(stage => {
     const bvid = stage.dataset.bvid;
     if (!bvid) return;
     const title = stage.dataset.videoTitle || '项目演示视频';
-    const poster = stage.querySelector('.bilibili-poster');
     const trigger = stage.querySelector('.bilibili-video-trigger');
     const clickOnly = stage.hasAttribute('data-video-click-only');
     let iframe = null;
     let mode = 'idle';
+    let previewTimer;
 
-    // 优先使用 Bilibili 官方接口返回的真实视频封面；接口不可用时保留本地渐变封面。
-    if (poster) {
-      const applyCover = payload => {
-        const cover = payload?.code === 0 ? payload.data?.pic : '';
-        if (!cover || !/^https?:\/\//i.test(cover)) return;
-        poster.style.backgroundImage = `url("${cover.replace(/"/g, '%22')}")`;
-        poster.classList.add('has-image');
-      };
-      const callbackName = `__biliCover_${bvid.replace(/[^a-z0-9]/gi, '')}_${Math.random().toString(36).slice(2)}`;
-      const coverScript = document.createElement('script');
-      const cleanup = () => { window[callbackName] = null; coverScript.remove(); };
-      window[callbackName] = payload => { applyCover(payload); cleanup(); };
-      coverScript.src = `https://api.bilibili.com/x/web-interface/view?bvid=${encodeURIComponent(bvid)}&jsonp=jsonp&callback=${callbackName}`;
-      coverScript.onerror = cleanup;
-      document.head.appendChild(coverScript);
-      window.setTimeout(cleanup, 5000);
-    }
+    coverObserver?.observe(stage);
 
-    const createPlayer = (playWithSound, shouldAutoplay = true) => {
+    const createPlayer = playWithSound => {
       if (iframe) iframe.remove();
       iframe = document.createElement('iframe');
       const params = new URLSearchParams({
@@ -1156,12 +1218,11 @@
         page: '1',
         high_quality: '1',
         danmaku: '0',
-        autoplay: shouldAutoplay ? '1' : '0',
+        autoplay: '1',
         muted: playWithSound ? '0' : '1'
       });
       iframe.src = `https://player.bilibili.com/player.html?${params.toString()}`;
       iframe.title = title;
-      iframe.loading = 'lazy';
       iframe.allow = 'autoplay; fullscreen; picture-in-picture';
       iframe.allowFullscreen = true;
       iframe.referrerPolicy = 'strict-origin-when-cross-origin';
@@ -1171,31 +1232,36 @@
     const enterPreview = () => {
       if (mode !== 'idle') return;
       mode = 'preview';
-      createPlayer(false, true);
+      createPlayer(false);
       stage.classList.add('is-preview');
     };
 
     const startPlayback = event => {
-      event?.preventDefault();
-      event?.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
+      const focusPlayer = document.activeElement === trigger;
+      window.clearTimeout(previewTimer);
       mode = 'playing';
-      createPlayer(true, true);
+      createPlayer(true);
       stage.classList.remove('is-preview');
       stage.classList.add('is-playing');
-      if (clickOnly && document.activeElement === trigger) iframe.focus();
+      if (focusPlayer) iframe.focus();
     };
 
     const resetPreview = () => {
+      window.clearTimeout(previewTimer);
       if (mode !== 'preview') return;
       mode = 'idle';
-      createPlayer(false, false);
+      iframe.remove();
+      iframe = null;
       stage.classList.remove('is-preview');
     };
 
     if (!clickOnly) {
-      stage.addEventListener('mouseenter', enterPreview);
-      stage.addEventListener('mouseleave', resetPreview);
-      createPlayer(false, false);
+      stage.addEventListener('pointerenter', event => {
+        if (event.pointerType === 'mouse' && mode === 'idle') previewTimer = window.setTimeout(enterPreview, 250);
+      });
+      stage.addEventListener('pointerleave', resetPreview);
     }
     trigger?.addEventListener('click', startPlayback);
     trigger?.addEventListener('keydown', event => {

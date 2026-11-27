@@ -739,15 +739,24 @@ html[data-theme="dark"] .page-toc {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-.certificate-preview img {
-  display: block;
-  width: 100%;
+.certificate-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
   max-height: calc(100dvh - 132px);
   aspect-ratio: 1200 / 760;
-  object-fit: contain;
   border-radius: 12px;
   background: #f7f3eb;
 }
+.certificate-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.certificate-status { margin: 0; padding: 16px; color: #514354; font-size: .88rem; }
 .certificate-preview figcaption {
   margin: 9px 4px 1px;
   overflow: hidden;
@@ -1988,7 +1997,7 @@ html[data-theme="dark"] .about-main { --about-deep: #312b49; }
   .award-heading h3 { margin-bottom: 4px; }
   .certificate-trigger { margin: 0 0 7px; }
   .certificate-preview.is-pinned { width: calc(100vw - 24px); padding: 9px; border-radius: 15px; }
-  .certificate-preview img { border-radius: 10px; }
+  .certificate-media { border-radius: 10px; }
   .certificate-close { top: 16px; right: 16px; }
   .work-copy .button { width: 100%; }
   .works-hero { min-height: 84svh; padding: 100px 16px 94px; background-position: 58% center; }
