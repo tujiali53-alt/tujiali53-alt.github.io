@@ -1266,6 +1266,9 @@ html[data-theme="dark"] .page-toc {
 .poster-dots { background: linear-gradient(135deg, #151b3c, #433d9d 55%, #1eb3c1); }
 .poster-parenting { background: linear-gradient(135deg, #5b437d, #bf718b 54%, #f2b36c); }
 .poster-mingwan { background: linear-gradient(135deg, #172744, #385e88 52%, #a66d8d); }
+.poster-apocalypse-kitchen { background: linear-gradient(135deg, #292638, #774941 54%, #bf7640); }
+.poster-akashic-pilgrimage { background: linear-gradient(135deg, #20223d, #454271 54%, #8060a4); }
+.poster-huiguang { background: linear-gradient(135deg, #232d38, #405557 54%, #8c6d4b); }
 .poster-sign-language { background: linear-gradient(135deg, #174c5c, #387f89 55%, #d4a75d); }
 .poster-vr-home { background: linear-gradient(135deg, #28455d, #4d7d78 54%, #d9a45d); }
 .poster-gaussian { background: linear-gradient(135deg, #29365f, #77618d 54%, #d67878); }
