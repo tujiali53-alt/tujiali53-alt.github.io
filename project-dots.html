@@ -5,18 +5,35 @@
 <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">TU</span><span class="brand-copy"><b>涂佳利</b><small>UNITY CLIENT DEVELOPER</small></span></a><nav class="topnav"><a data-nav="home" href="index.html">首页</a><a data-nav="works" href="works.html">作品</a><a data-nav="about" href="about.html">关于</a></nav><div class="top-actions"><button class="theme-toggle" type="button" aria-label="切换深浅主题">◐</button><a class="mini-cta" href="mailto:2846314132@qq.com">联系我 ↗</a></div></header>
   <main class="inner-main">
     <section class="project-detail-hero">
-      <div><a class="page-index" href="works.html">← 返回作品列表</a><h1>DOTS<br>骨骼动画<br>测试 Demo</h1><p>基于 Unity DOTS 架构实现高性能 GPU 骨骼动画测试，采用 2D 纹理烘焙动画数据，结合 GPU Instancing 批量渲染。</p><div class="project-facts"><div><small>ROLE</small><b>独立开发</b></div><div><small>TIME</small><b>2026.01—03</b></div><div><small>ENGINE</small><b>Unity</b></div></div></div>
-      <figure class="project-detail-media"><img src="assets/images/projects/dots/cover.svg" alt="DOTS 骨骼动画 Demo 项目封面占位图"></figure>
+      <div>
+        <a class="page-index" href="works.html">← 返回作品列表</a>
+        <h1>DOTS<br>骨骼动画<br>测试 Demo</h1>
+        <p>用 Unity DOTS / ECS 更新实体的动画状态，用 Shader 读取烘焙后的骨骼动画数据，再通过 GPU Instancing 批量渲染。</p>
+        <div class="project-facts">
+          <div><small>ROLE</small><b>独立开发</b></div>
+          <div><small>TIME</small><b>2026.01—03</b></div>
+          <div><small>ENGINE</small><b>Unity</b></div>
+        </div>
+      </div>
+      <div>
+        <div class="works-project-video bilibili-video" data-bvid="BV1iZomBMEGv" data-video-title="DOTS 骨骼动画测试 Demo" data-video-click-only>
+          <div class="bilibili-poster poster-dots" aria-hidden="true"></div>
+          <button class="bilibili-video-trigger" type="button"><i aria-hidden="true">▶</i><b>播放运行演示</b></button>
+        </div>
+        <p><a class="works-card-video" href="https://www.bilibili.com/video/BV1iZomBMEGv/" target="_blank" rel="noopener noreferrer">在 B 站观看演示 <span aria-hidden="true">↗</span></a></p>
+      </div>
     </section>
-    <section class="section-shell story-grid"><div><p class="kicker">CASE STUDY / 01</p><h2>让上万实体，保持同一种流畅。</h2></div><div class="story-copy"><h3>项目背景</h3><p>探索大量动画实体同时运行时的 CPU 逻辑更新、动画数据传输与渲染瓶颈，验证 DOTS 与 GPU Instancing 组合方案。</p><h3>我的职责</h3><p>独立完成动画烘焙工具开发、ECS 业务系统编写、动画 Shader 开发与材质属性传参优化，实现多线程动画逻辑更新与渲染性能优化。</p><h3>技术方案</h3><p>将骨骼动画数据烘焙为 2D 纹理，在 GPU 侧读取动画状态；使用 ECS 组织动画实体及状态更新，并通过 Instancing 降低大量实体的绘制开销。</p><h3>结果与反思</h3><p>具体帧率、实体数量、设备环境和性能对比数据将在测试完成后补充。正式版本建议加入 Profiler 截图与 Before / After 对比。</p></div></section>
-    <section class="section-shell">
-      <div class="gallery-title"><div><p class="kicker">PROJECT MEDIA</p><h2>过程与画面</h2></div><p>占位图片可直接覆盖替换</p></div>
-      <div class="gallery-track"><button class="gallery-item" type="button"><img src="assets/images/projects/dots/detail-01.svg" alt="动画烘焙工具占位图"><span>BAKING TOOL</span></button><button class="gallery-item" type="button"><img src="assets/images/projects/dots/detail-02.svg" alt="ECS 系统结构占位图"><span>ECS SYSTEM</span></button><button class="gallery-item" type="button"><img src="assets/images/projects/dots/detail-03.svg" alt="性能测试结果占位图"><span>PERFORMANCE</span></button></div>
-      <div class="gallery-title"><div><p class="kicker">DEMO VIDEO</p><h2>运行演示</h2></div><p><a class="works-card-video" href="https://www.bilibili.com/video/BV1iZomBMEGv/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" target="_blank" rel="noopener noreferrer">Bilibili · Dots骨骼动画测试demo <span aria-hidden="true">↗</span></a></p></div>
-      <div class="video-panel works-project-video bilibili-video" data-bvid="BV1iZomBMEGv" data-video-title="DOTS 骨骼动画测试 Demo" data-video-url="https://www.bilibili.com/video/BV1iZomBMEGv/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" aria-label="DOTS 骨骼动画测试 Demo 演示视频"><div class="bilibili-poster poster-dots" role="img" aria-label="DOTS 骨骼动画测试 Demo 视频封面"><span>DOTS<br>ANIMATION</span><small>GPU SKINNING / VIDEO</small></div><button class="bilibili-video-trigger" type="button"><i>▶</i><b>悬浮预览 · 点击播放</b><small>DEMO VIDEO / BILIBILI</small></button></div>
+    <section class="section-shell story-grid">
+      <h2>基于 Unity DOTS 的 GPU 骨骼动画</h2>
+      <div class="story-copy">
+        <h3>项目背景</h3>
+        <p>探索多个动画实体同时运行时，如何组织 CPU 侧的动画状态更新、动画数据传递和 GPU 渲染。</p>
+        <h3>我的职责</h3>
+        <p>独立开发 Unity Editor 动画烘焙工具、ECS 动画更新系统和渲染 Shader，实现多线程动画状态更新与材质属性传递。</p>
+        <h3>技术方案</h3>
+        <p>烘焙工具将骨骼动画数据写入二维纹理。运行时由 ECS 更新各实体的动画状态，Shader 根据状态采样对应的动画数据，再通过 GPU Instancing 批量绘制。</p>
+      </div>
     </section>
   </main>
-  <div class="lightbox" role="dialog" aria-modal="true"><button class="modal-close" type="button">×</button><img src="assets/images/projects/dots/detail-01.svg" alt=""></div>
-  <div class="video-modal" role="dialog" aria-modal="true"><button class="modal-close" type="button">×</button><div class="video-stage"><p>视频已移至页面内播放器。</p></div></div>
   <nav class="mobile-nav"><a data-nav="home" href="index.html"><span>⌂</span>首页</a><a data-nav="works" href="works.html"><span>◇</span>作品</a><a data-nav="experience" href="index.html#internship"><span>⌁</span>经历</a><a data-nav="about" href="about.html"><span>○</span>关于</a></nav>
 </body></html>
