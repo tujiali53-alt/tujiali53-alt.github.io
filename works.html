@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="涂佳利的 Unity 客户端开发项目、GameJam 作品、学校项目与实验室经历。">
   <title>作品｜涂佳利</title>
-  <link rel="stylesheet" href="styles.css?v=20261127-4">
-  <script src="script.js?v=20261127-4" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261127-6">
+  <script src="script.js?v=20261127-6" defer></script>
 </head>
 <body data-page="works">
-  <div class="page-loader" role="status" aria-live="polite">
+  <div class="page-loader" role="status" aria-live="polite" aria-hidden="true" hidden>
     <div class="pixel-pet" aria-hidden="true">
       <i class="pixel-pet-ear pixel-pet-ear-left"></i><i class="pixel-pet-ear pixel-pet-ear-right"></i>
       <i class="pixel-pet-tail"></i><i class="pixel-pet-body"></i><i class="pixel-pet-paw"></i>
@@ -56,10 +56,27 @@
       <div class="works-layout">
         <nav class="page-toc works-toc" aria-label="作品目录">
           <p class="page-toc-title">作品目录</p>
-          <a href="#featured-work"><small>01</small><span>精选作品</span></a>
-          <a href="#gamejam-work"><small>02</small><span>GameJam 作品</span></a>
-          <a href="#school-work"><small>03</small><span>学校项目作品</span></a>
-          <a href="#lab-work"><small>04</small><span>实验室经历</span></a>
+          <button class="works-toc-toggle" type="button" aria-expanded="false" aria-controls="works-toc-entries" hidden>作品目录</button>
+          <ul class="works-toc-entries" id="works-toc-entries">
+            <li><a href="#featured-work"><small>01</small><span>精选作品</span></a></li>
+            <li>
+              <a href="#gamejam-work"><small>02</small><span>GameJam 作品</span></a>
+              <ul class="works-toc-projects">
+                <li><a href="#apocalypse-kitchen">《末日厨房》</a></li>
+                <li><a href="#akashic-pilgrimage">《阿卡夏启示录：愚者的朝圣》</a></li>
+                <li><a href="#parenting-protocol">《育儿协议》</a></li>
+                <li><a href="#huiguang">《回光》</a></li>
+                <li><a href="#mingwan-72-hours">《明湾72小时》</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#school-work"><small>03</small><span>学校项目作品</span></a>
+              <ul class="works-toc-projects">
+                <li><a href="#vr-home-tour">VR 家居漫游</a></li>
+              </ul>
+            </li>
+            <li><a href="#lab-work"><small>04</small><span>实验室经历</span></a></li>
+          </ul>
         </nav>
 
         <div class="works-main">
@@ -125,7 +142,7 @@
             </header>
 
             <div class="works-card-grid">
-              <article class="works-card" id="apocalypse-kitchen">
+              <article class="works-card" id="apocalypse-kitchen" tabindex="-1">
                 <div class="works-card-player bilibili-video" data-bvid="BV1wtW46GE5D" data-video-title="《末日厨房》演示视频" data-video-click-only>
                   <div class="bilibili-poster" aria-hidden="true"></div>
                   <button class="bilibili-video-trigger" type="button" aria-label="播放《末日厨房》演示视频"><i aria-hidden="true">▶</i></button>
@@ -145,7 +162,7 @@
                 </div>
               </article>
 
-              <article class="works-card" id="akashic-pilgrimage">
+              <article class="works-card" id="akashic-pilgrimage" tabindex="-1">
                 <div class="works-card-player bilibili-video" data-bvid="BV1YHhq6rEii" data-video-title="《阿卡夏启示录：愚者的朝圣》演示视频" data-video-click-only>
                   <div class="bilibili-poster" aria-hidden="true"></div>
                   <button class="bilibili-video-trigger" type="button" aria-label="播放《阿卡夏启示录：愚者的朝圣》演示视频"><i aria-hidden="true">▶</i></button>
@@ -164,7 +181,7 @@
                 </div>
               </article>
 
-              <article class="works-card" id="parenting-protocol">
+              <article class="works-card" id="parenting-protocol" tabindex="-1">
                 <div class="works-card-player bilibili-video" data-bvid="BV1c1Vq65EgF" data-video-title="《育儿协议》演示视频" data-video-click-only>
                   <div class="bilibili-poster" aria-hidden="true"></div>
                   <button class="bilibili-video-trigger" type="button" aria-label="播放《育儿协议》演示视频"><i aria-hidden="true">▶</i></button>
@@ -187,7 +204,7 @@
                 </div>
               </article>
 
-              <article class="works-card" id="huiguang">
+              <article class="works-card" id="huiguang" tabindex="-1">
                 <div class="works-card-player bilibili-video" data-bvid="BV1GLnv6kEtd" data-video-title="《回光》演示视频" data-video-click-only>
                   <div class="bilibili-poster" aria-hidden="true"></div>
                   <button class="bilibili-video-trigger" type="button" aria-label="播放《回光》演示视频"><i aria-hidden="true">▶</i></button>
@@ -212,7 +229,7 @@
                 </div>
               </article>
 
-              <article class="works-card" id="mingwan-72-hours">
+              <article class="works-card" id="mingwan-72-hours" tabindex="-1">
                 <div class="works-card-player bilibili-video" data-bvid="BV1s2tR6qEBJ" data-video-title="《明湾72小时》演示视频" data-video-click-only>
                   <div class="bilibili-poster" aria-hidden="true"></div>
                   <button class="bilibili-video-trigger" type="button" aria-label="播放《明湾72小时》演示视频"><i aria-hidden="true">▶</i></button>
@@ -263,7 +280,7 @@
                 </div>
               </article>
 
-              <article class="works-card" id="vr-home-tour">
+              <article class="works-card" id="vr-home-tour" tabindex="-1">
                 <div class="works-card-player bilibili-video" data-bvid="BV1mG3jzBEtc" data-video-title="VR 家居漫游演示视频" data-video-click-only>
                   <div class="bilibili-poster" aria-hidden="true"></div>
                   <button class="bilibili-video-trigger" type="button" aria-label="播放VR 家居漫游演示视频"><i aria-hidden="true">▶</i></button>

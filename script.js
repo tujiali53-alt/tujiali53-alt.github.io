@@ -6,76 +6,16 @@
   const loader = document.querySelector('.page-loader');
   const loaderBar = loader?.querySelector('[role="progressbar"]');
   const loaderPercent = loader?.querySelector('[data-loader-percent]');
-  const loaderStartedAt = performance.now();
-  const minimumLoaderTime = reducedMotion ? 0 : 320;
-  let loaderProgress = reducedMotion ? 100 : 8;
-  let loaderFrame = 0;
-  let loaderFinishTimer = 0;
-  let loaderExitTimer = 0;
-  let idleTask = 0;
-  let startNonCriticalWork = () => {};
-  let nonCriticalStarted = false;
-
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme) root.dataset.theme = savedTheme;
-
-  const renderLoaderProgress = value => {
-    const rounded = Math.max(0, Math.min(100, Math.round(value)));
-    loader?.style.setProperty('--loader-progress', String(rounded / 100));
-    if (loaderPercent) loaderPercent.textContent = `${rounded}%`;
-    loaderBar?.setAttribute('aria-valuenow', String(rounded));
-  };
-
-  const tickLoader = () => {
-    loaderProgress += (88 - loaderProgress) * .075;
-    renderLoaderProgress(loaderProgress);
-    if (loaderProgress < 87.5) loaderFrame = requestAnimationFrame(tickLoader);
-  };
-
-  const scheduleNonCritical = callback => {
-    if (nonCriticalStarted) return;
-    nonCriticalStarted = true;
-    if ('requestIdleCallback' in window) {
-      idleTask = window.requestIdleCallback(callback, { timeout: 1600 });
-    } else {
-      idleTask = window.setTimeout(callback, 700);
-    }
-  };
-
-  const finishLoader = () => {
-    if (!loader || loader.classList.contains('is-done')) return;
-    const remaining = Math.max(0, minimumLoaderTime - (performance.now() - loaderStartedAt));
-    window.clearTimeout(loaderFinishTimer);
-    loaderFinishTimer = window.setTimeout(() => {
-      cancelAnimationFrame(loaderFrame);
-      renderLoaderProgress(100);
-      loaderExitTimer = window.setTimeout(() => {
-        loader.classList.add('is-done');
-        loader.setAttribute('aria-hidden', 'true');
-        scheduleNonCritical(() => startNonCriticalWork());
-      }, reducedMotion ? 0 : 80);
-    }, remaining);
-  };
-
-  renderLoaderProgress(loaderProgress);
-  if (!reducedMotion && loader) loaderFrame = requestAnimationFrame(tickLoader);
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', finishLoader, { once: true });
-  } else {
-    finishLoader();
+  try {
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme) root.dataset.theme = savedTheme;
+  } catch {
+    // The default theme also works when storage is unavailable.
   }
 
   const syncMotionState = () => root.classList.toggle('motion-paused', document.hidden);
   document.addEventListener('visibilitychange', syncMotionState, { passive: true });
   syncMotionState();
-
-  window.addEventListener('pagehide', () => {
-    cancelAnimationFrame(loaderFrame);
-    window.clearTimeout(loaderFinishTimer);
-    window.clearTimeout(loaderExitTimer);
-    if ('cancelIdleCallback' in window) window.cancelIdleCallback(idleTask);
-    else window.clearTimeout(idleTask);
-  }, { once: true });
 
   document.querySelectorAll(`[data-nav="${page}"]`).forEach(link => link.classList.add('is-active'));
 
@@ -87,20 +27,11 @@
   document.querySelector('.theme-toggle')?.addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
-    localStorage.setItem('portfolio-theme', next);
-  });
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank' || link.hasAttribute('download')) return;
-    const url = new URL(link.href, window.location.href);
-    if (url.origin !== window.location.origin) return;
-    link.addEventListener('click', event => {
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      document.body.classList.add('is-leaving');
-      window.setTimeout(() => { window.location.href = url.href; }, reducedMotion ? 0 : 210);
-    });
+    try {
+      localStorage.setItem('portfolio-theme', next);
+    } catch {
+      // The theme still applies to the current page.
+    }
   });
 
   const aboutCalendar = document.querySelector('[data-about-calendar]');
@@ -805,8 +736,6 @@
     document.head.appendChild(particleScript);
   };
 
-  startNonCriticalWork = loadHomeParticles;
-
   const certificatePreview = document.querySelector('[data-certificate-preview]');
   const certificateMedia = certificatePreview?.querySelector('[data-certificate-media]');
   const certificateStatus = certificateMedia?.querySelector('[role="status"]');
@@ -1049,7 +978,39 @@
   document.querySelectorAll('.lightbox, .video-modal').forEach(modal => modal.addEventListener('click', event => { if (event.target === modal) closeModal(modal); }));
   window.addEventListener('keydown', event => { if (event.key === 'Escape') document.querySelectorAll('.is-open').forEach(closeModal); });
 
-  const tocLinks = [...document.querySelectorAll('.page-toc a')];
+  const worksToc = document.querySelector('.works-toc');
+  const worksTocToggle = worksToc?.querySelector('.works-toc-toggle');
+  if (worksTocToggle) {
+    const setTocOpen = open => worksTocToggle.setAttribute('aria-expanded', String(open));
+    const isTocOpen = () => worksTocToggle.getAttribute('aria-expanded') === 'true';
+    const projectLinks = worksToc.querySelectorAll('.works-toc-projects a');
+    const syncProjectLink = () => {
+      projectLinks.forEach(link => {
+        if (link.hash === window.location.hash) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    worksTocToggle.addEventListener('click', () => setTocOpen(!isTocOpen()));
+    worksToc.addEventListener('click', event => {
+      if (event.target.closest('a')) setTocOpen(false);
+    });
+    worksToc.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && isTocOpen()) {
+        setTocOpen(false);
+        worksTocToggle.focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (isTocOpen() && !worksToc.contains(event.target)) setTocOpen(false);
+    });
+    window.addEventListener('hashchange', syncProjectLink);
+    syncProjectLink();
+    worksToc.dataset.collapsible = '';
+    worksTocToggle.hidden = false;
+  }
+
+  const tocLinks = [...document.querySelectorAll('.page-toc a:not(.works-toc-projects a)')];
   const tocSections = [...document.querySelectorAll('[data-toc]')];
   if (tocLinks.length && tocSections.length) {
     const setActive = id => {
@@ -1268,4 +1229,54 @@
       if (event.key === 'Enter' || event.key === ' ') startPlayback(event);
     });
   });
+
+  let homeParticlesScheduled = false;
+  const scheduleHomeParticles = () => {
+    if (!homeParticles || homeParticlesScheduled) return;
+    homeParticlesScheduled = true;
+    if ('requestIdleCallback' in window) window.requestIdleCallback(loadHomeParticles, { timeout: 1600 });
+    else window.setTimeout(loadHomeParticles, 700);
+  };
+
+  if (!loader || reducedMotion) {
+    scheduleHomeParticles();
+    return;
+  }
+
+  const loaderDuration = 400;
+  const loaderStartedAt = performance.now();
+  let loaderFrame;
+  const renderLoaderProgress = progress => {
+    loader.style.setProperty('--loader-progress', String(progress / 100));
+    if (loaderPercent) loaderPercent.textContent = `${progress}%`;
+    loaderBar?.setAttribute('aria-valuenow', String(progress));
+  };
+  const tickLoader = () => {
+    const progress = Math.min(100, Math.round(8 + 92 * (performance.now() - loaderStartedAt) / loaderDuration));
+    renderLoaderProgress(progress);
+    if (progress < 100) loaderFrame = requestAnimationFrame(tickLoader);
+  };
+
+  const finishLoader = () => {
+    cancelAnimationFrame(loaderFrame);
+    renderLoaderProgress(100);
+    loader.classList.add('is-done');
+    loader.setAttribute('aria-hidden', 'true');
+    scheduleHomeParticles();
+  };
+
+  const loaderTimer = window.setTimeout(finishLoader, loaderDuration);
+  window.addEventListener('pagehide', () => {
+    loader.hidden = true;
+    loader.setAttribute('aria-hidden', 'true');
+    cancelAnimationFrame(loaderFrame);
+    window.clearTimeout(loaderTimer);
+  });
+  window.addEventListener('pageshow', event => {
+    if (event.persisted && !loader.classList.contains('is-done')) scheduleHomeParticles();
+  });
+
+  tickLoader();
+  loader.setAttribute('aria-hidden', 'false');
+  loader.hidden = false;
 })();
