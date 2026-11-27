@@ -1026,12 +1026,107 @@
     });
   }
 
+  const workCards = document.querySelectorAll('.works-card');
+  if (workCards.length) {
+    const mobileNav = document.querySelector('.mobile-nav');
+    const compactLayout = window.matchMedia('(max-width: 680px)');
+    let activePreview = null;
+    let hoverPreview = null;
+    let closePreviewTimer = 0;
+
+    const positionPreview = () => {
+      if (!activePreview?.panel.matches(':popover-open')) return;
+      const { card, panel } = activePreview;
+      const bounds = card.getBoundingClientRect();
+      const viewportWidth = root.clientWidth;
+      const viewportBottom = compactLayout.matches && mobileNav ? mobileNav.getBoundingClientRect().top : root.clientHeight;
+      const edge = 12;
+      const gap = 10;
+      const top = Math.max(0, topbar?.getBoundingClientRect().bottom ?? 0) + edge;
+      const bottom = viewportBottom - edge;
+      if (hoverPreview === activePreview && (bounds.bottom < top || bounds.top > bottom)) {
+        panel.hidePopover();
+        return;
+      }
+
+      const roomLeft = bounds.left - gap - edge;
+      const roomRight = viewportWidth - bounds.right - gap - edge;
+      const preferredWidth = 400;
+      const placeOnLeft = roomRight < preferredWidth && roomLeft > roomRight;
+      const sideRoom = placeOnLeft ? roomLeft : roomRight;
+      const useSide = !compactLayout.matches && sideRoom >= 210;
+      const width = Math.min(preferredWidth, useSide ? sideRoom : viewportWidth - 2 * edge);
+      const availableHeight = Math.max(0, bottom - top);
+      panel.style.inset = 'auto';
+      panel.style.margin = '0';
+      panel.style.width = `${width}px`;
+      panel.style.maxHeight = `${Math.min(540, availableHeight)}px`;
+
+      const height = panel.offsetHeight;
+      const sideLeft = placeOnLeft ? bounds.left - gap - width : bounds.right + gap;
+      const left = useSide ? sideLeft : (viewportWidth - width) / 2;
+      const panelTop = useSide ? Math.max(top, Math.min(bounds.top, bottom - height)) : top + (availableHeight - height) / 2;
+      panel.style.left = `${left}px`;
+      panel.style.top = `${panelTop}px`;
+    };
+
+    workCards.forEach(card => {
+      const panel = card.querySelector('.works-card-detail');
+      const trigger = card.querySelector('h3 button');
+      const player = card.querySelector('.works-card-player');
+      if (!panel?.showPopover || !trigger) return;
+      const preview = { card, panel };
+
+      panel.addEventListener('toggle', event => {
+        if (event.newState === 'open') {
+          activePreview = preview;
+          positionPreview();
+        } else {
+          if (activePreview === preview) activePreview = null;
+          if (hoverPreview === preview) hoverPreview = null;
+        }
+      });
+
+      card.addEventListener('pointerenter', event => {
+        if (event.pointerType !== 'mouse' || compactLayout.matches) return;
+        if (activePreview && activePreview !== hoverPreview && activePreview.panel.matches(':popover-open')) return;
+        window.clearTimeout(closePreviewTimer);
+        if (panel.matches(':popover-open')) return;
+        hoverPreview = preview;
+        panel.showPopover({ source: trigger });
+      });
+
+      card.addEventListener('pointerleave', event => {
+        if (event.pointerType !== 'mouse' || hoverPreview !== preview) return;
+        closePreviewTimer = window.setTimeout(() => {
+          if (hoverPreview === preview && panel.matches(':popover-open')) panel.hidePopover();
+        }, 220);
+      });
+
+      trigger.addEventListener('click', event => {
+        if (hoverPreview !== preview || !panel.matches(':popover-open')) return;
+        event.preventDefault();
+        hoverPreview = null;
+      });
+      player?.addEventListener('pointerdown', () => {
+        if (hoverPreview === preview && panel.matches(':popover-open')) panel.hidePopover();
+      });
+      panel.addEventListener('focusin', () => {
+        if (hoverPreview === preview) hoverPreview = null;
+      });
+    });
+
+    window.addEventListener('resize', positionPreview);
+    window.addEventListener('scroll', positionPreview, { passive: true });
+  }
+
   document.querySelectorAll('.bilibili-video').forEach(stage => {
     const bvid = stage.dataset.bvid;
     if (!bvid) return;
     const title = stage.dataset.videoTitle || '项目演示视频';
     const poster = stage.querySelector('.bilibili-poster');
     const trigger = stage.querySelector('.bilibili-video-trigger');
+    const clickOnly = stage.hasAttribute('data-video-click-only');
     let iframe = null;
     let mode = 'idle';
 
@@ -1087,6 +1182,7 @@
       createPlayer(true, true);
       stage.classList.remove('is-preview');
       stage.classList.add('is-playing');
+      if (clickOnly && document.activeElement === trigger) iframe.focus();
     };
 
     const resetPreview = () => {
@@ -1096,14 +1192,15 @@
       stage.classList.remove('is-preview');
     };
 
-    stage.addEventListener('mouseenter', enterPreview);
-    stage.addEventListener('mouseleave', resetPreview);
+    if (!clickOnly) {
+      stage.addEventListener('mouseenter', enterPreview);
+      stage.addEventListener('mouseleave', resetPreview);
+      createPlayer(false, false);
+    }
     trigger?.addEventListener('click', startPlayback);
     trigger?.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') startPlayback(event);
     });
 
-    // 静止状态保留 Bilibili 播放器封面，不自动播放。
-    createPlayer(false, false);
   });
 })();

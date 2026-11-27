@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="涂佳利的 Unity 客户端开发项目、GameJam 作品、学校项目与实验室经历。">
   <title>作品｜涂佳利</title>
-  <link rel="stylesheet" href="styles.css?v=20261127-1">
-  <script src="script.js?v=20260831-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261127-3">
+  <script src="script.js?v=20261127-3" defer></script>
 </head>
 <body data-page="works">
   <div class="page-loader" role="status" aria-live="polite">
@@ -28,7 +28,6 @@
       <a data-nav="home" href="index.html">首页</a>
       <a data-nav="works" href="works.html">作品</a>
       <a data-nav="about" href="about.html">关于</a>
-      <a data-nav="resume" href="resume.html">简历</a>
     </nav>
     <div class="top-actions">
       <button class="theme-toggle" type="button" aria-label="切换深浅主题"><span>◐</span></button>
@@ -105,9 +104,8 @@
                   <p>基于 Unity DOTS / ECS 实现高性能 GPU 骨骼动画测试。动画数据烘焙至二维纹理并由 Shader 采样，结合 GPU Instancing 完成大规模动画实体的批量渲染。</p>
                   <p>我独立完成动画烘焙 Editor 工具、ECS 动画更新系统、渲染 Shader，以及材质属性传递和多线程更新流程优化。</p>
                   <div class="tag-row"><span>Unity</span><span>C#</span><span>ECS</span><span>Shader</span></div>
-                  <div class="works-resource-list" aria-label="项目链接预留位置">
-                    <span><b>演示视频</b><a href="https://www.bilibili.com/video/BV1iZomBMEGv/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" target="_blank" rel="noopener noreferrer">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                    <span><b>GitHub</b><em>地址待补充</em></span>
+                  <div class="works-resource-list" aria-label="DOTS 项目链接">
+                    <span><b>Bilibili</b><a href="https://www.bilibili.com/video/BV1iZomBMEGv/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" target="_blank" rel="noopener noreferrer">Dots骨骼动画测试demo <i aria-hidden="true">↗</i></a></span>
                   </div>
                 </div>
                 <div class="works-project-video bilibili-video" data-bvid="BV1iZomBMEGv" data-video-title="DOTS 骨骼动画测试 Demo" data-video-url="https://www.bilibili.com/video/BV1iZomBMEGv/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" aria-label="DOTS 骨骼动画测试 Demo 演示视频">
@@ -126,136 +124,117 @@
               <h2>GameJam 作品</h2>
             </header>
 
-            <article class="works-project gamejam-project is-media-left" id="parenting-protocol">
-              <header class="works-project-head">
-                <span>网易2026MINIGAMEJAM游戏开发大赛</span>
-                <h3>《育儿协议》</h3>
-              </header>
+            <div class="works-card-grid">
+              <article class="works-card" id="apocalypse-kitchen">
+                <div class="works-card-player bilibili-video" data-bvid="BV1wtW46GE5D" data-video-title="《末日厨房》演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放《末日厨房》演示视频"><i aria-hidden="true">▶</i></button>
+                </div>
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="apocalypse-kitchen-detail" aria-label="查看《末日厨房》简介">《末日厨房》</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1wtW46GE5D/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《末日厨房》演示">B 站 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="works-card-detail" id="apocalypse-kitchen-detail" popover role="region" aria-labelledby="apocalypse-kitchen-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="apocalypse-kitchen-detail-title">《末日厨房》简介</h4>
+                    <button type="button" popovertarget="apocalypse-kitchen-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">多结局探索 · 烹饪</p>
+                  <p class="works-card-detail-event">thatGamejam</p>
+                  <p>末日厨房是一款在世界末日来临前烹饪美食的多结局探索游戏！你将扮演一位失忆的厨师，在夜晚穿越森林，通过各种有趣的事件收集食材，然后在白天将它们变成可口的食物——或是变成焦炭，搞砸这一切。做出更好的食物，解锁日记与菜谱！当末日最终降临时，你的归宿又将是……？</p>
+                </div>
+              </article>
 
-              <div class="works-project-intro works-gamejam-layout">
-                <div class="works-project-copy">
-                  <h4>作品简介</h4>
+              <article class="works-card" id="akashic-pilgrimage">
+                <div class="works-card-player bilibili-video" data-bvid="BV1YHhq6rEii" data-video-title="《阿卡夏启示录：愚者的朝圣》演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放《阿卡夏启示录：愚者的朝圣》演示视频"><i aria-hidden="true">▶</i></button>
+                </div>
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="akashic-pilgrimage-detail" aria-label="查看《阿卡夏启示录：愚者的朝圣》简介">《阿卡夏启示录：愚者的朝圣》</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1YHhq6rEii/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《阿卡夏启示录：愚者的朝圣》演示">B 站 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="works-card-detail" id="akashic-pilgrimage-detail" popover role="region" aria-labelledby="akashic-pilgrimage-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="akashic-pilgrimage-detail-title">《阿卡夏启示录：愚者的朝圣》简介</h4>
+                    <button type="button" popovertarget="akashic-pilgrimage-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">独立游戏 Demo</p>
+                  <p>独立游戏制作愚人的朝圣Demo</p>
+                </div>
+              </article>
+
+              <article class="works-card" id="parenting-protocol">
+                <div class="works-card-player bilibili-video" data-bvid="BV1c1Vq65EgF" data-video-title="《育儿协议》演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放《育儿协议》演示视频"><i aria-hidden="true">▶</i></button>
+                </div>
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="parenting-protocol-detail" aria-label="查看《育儿协议》简介">《育儿协议》</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1c1Vq65EgF/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《育儿协议》演示">B 站 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="works-card-detail" id="parenting-protocol-detail" popover role="region" aria-labelledby="parenting-protocol-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="parenting-protocol-detail-title">《育儿协议》简介</h4>
+                    <button type="button" popovertarget="parenting-protocol-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">模拟 · 养成 · 益智</p>
+                  <p class="works-card-detail-event">网易2026MiniGameJam游戏开发大赛</p>
                   <p>你的蛋孵化出了一个孩子，喂食、洗澡、外出、睡觉……以俯视视角照料房间内的孩子，规划每日起居活动，关爱孩子的身心健康，与场景内物体互动，陪伴孩子成长。</p>
-                  <h4>作品介绍</h4>
                   <p>《育儿协议》是一款以 2D 等距视角房间为舞台的互动叙事轻 Meta 养成作品。玩家以第三人称的照料者身份，在固定的生活空间里陪伴角色度过一个又一个日常：喂食、洗澡、睡觉、翻阅手册、外出，并在有限的「时间单元」内做出选择。每一次行动都会牵动状态，也会触发对话、随机事件与手册新页，最终汇向不同阶段的剧情与结局。</p>
                   <p>游戏采用双周目结构。一周目侧重建立照料节奏与房间规则；二周目则引入捉迷藏等特殊玩法，并在最后一天走向删除、告别与致谢的完整演出。</p>
-                  <div class="tag-row" aria-label="作品类型"><span>模拟</span><span>养成</span><span>益智</span></div>
-                  <div class="works-resource-list" aria-label="《育儿协议》项目信息">
-                    <span><b>GameJam</b><em>网易2026MiniGameJam游戏开发大赛</em></span>
-                    <span><b>作品页面</b><a href="https://game.academy.163.com/event/mg2026/mg2026?workId=50337" target="_blank" rel="noopener noreferrer">前往查看 <i aria-hidden="true">↗</i></a></span>
-                    <span><b>演示视频</b><a href="https://www.bilibili.com/video/BV1c1Vq65EgF/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" target="_blank" rel="noopener noreferrer">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
+                  <a href="https://game.academy.163.com/event/mg2026/mg2026?workId=50337" target="_blank" rel="noopener noreferrer">查看作品页面 <span aria-hidden="true">↗</span></a>
                 </div>
-                <aside class="works-gamejam-media" aria-label="《育儿协议》演示视频位置">
-                  <div class="works-project-video bilibili-video" data-bvid="BV1c1Vq65EgF" data-video-title="《育儿协议》作品全流程展示" data-video-url="https://www.bilibili.com/video/BV1c1Vq65EgF/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" data-video-slot>
-                    <div class="bilibili-poster poster-parenting" role="img" aria-label="《育儿协议》演示视频封面"><span>育儿协议</span><small>GAMEJAM / VIDEO</small></div>
-                    <button class="bilibili-video-trigger" type="button"><i>▶</i><b>悬浮预览 · 点击播放</b><small>GAMEPLAY VIDEO / BILIBILI</small></button>
-                  </div>
-                  <p class="works-video-caption"><span>演示视频</span><em>16:9 · MP4 / WebM</em></p>
-                </aside>
-              </div>
-            </article>
+              </article>
 
-            <article class="works-project gamejam-project is-media-right" id="mingwan-72-hours">
-              <header class="works-project-head">
-                <span>金海豚X好游快爆游戏开发大赛</span>
-                <h3>《明湾72小时》</h3>
-              </header>
-
-              <div class="works-project-intro works-gamejam-layout">
-                <div class="works-project-copy">
-                  <h4>作品简介</h4>
-                  <p>《明湾72h》是一款桌面模拟叙事解谜游戏。玩家化身智慧城市平台夜班质检员，在 72 小时内审阅 AI 工单、搜集证据并作出选择，逐步揭开“已解决”背后的系统真相。</p>
-                  <h4>作品介绍</h4>
-                  <p>游戏背景设定在虚构智慧城市「明湾」，居民通过「明湾通」提交各类生活诉求，AI 先行处理，复杂案例则转交人工。然而系统给你的任务并不简单，随着夜班推进，你会逐渐发现，自己或许并非来帮居民伸张正义，而是来签字确认一场名为 AUTO-CLEAR 的历史异常清理——把无法分类的旧工单统统标记为「已解决」。</p>
-                  <p>游戏核心玩法围绕「后台工单处理模拟 + 证据推理 + 叙事选择」展开多分支叙事。十起彼此关联的居民事件、风险值与倒计时共同制造压力，玩家的查证、转人工或快速关单都会影响最终对峙与四种结局，并追问：系统停止回应，真的等于问题被解决了吗？</p>
-                  <div class="tag-row" aria-label="作品类型"><span>悬疑</span><span>推理</span><span>文字</span></div>
-                  <div class="works-resource-list" aria-label="《明湾72小时》项目信息">
-                    <span><b>GameJam</b><em>金海豚X好游快爆游戏开发大赛</em></span>
-                    <span><b>作品页面</b><a href="https://www.3839.com/a/200302.htm" target="_blank" rel="noopener noreferrer">前往查看 <i aria-hidden="true">↗</i></a></span>
-                    <span><b>演示视频</b><a href="https://www.bilibili.com/video/BV1s2tR6qEBJ/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" target="_blank" rel="noopener noreferrer">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
+              <article class="works-card" id="huiguang">
+                <div class="works-card-player bilibili-video" data-bvid="BV1GLnv6kEtd" data-video-title="《回光》演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放《回光》演示视频"><i aria-hidden="true">▶</i></button>
                 </div>
-                <aside class="works-gamejam-media" aria-label="《明湾72小时》演示视频位置">
-                  <div class="works-project-video bilibili-video" data-bvid="BV1s2tR6qEBJ" data-video-title="《明湾72小时》演示 Demo" data-video-url="https://www.bilibili.com/video/BV1s2tR6qEBJ/?share_source=copy_web&amp;vd_source=861486630ad49ccf75ab8b502960a5e3" data-video-slot>
-                    <div class="bilibili-poster poster-mingwan" role="img" aria-label="《明湾72小时》演示视频封面"><span>明湾 72 小时</span><small>NARRATIVE GAME / VIDEO</small></div>
-                    <button class="bilibili-video-trigger" type="button"><i>▶</i><b>悬浮预览 · 点击播放</b><small>GAMEPLAY VIDEO / BILIBILI</small></button>
-                  </div>
-                  <p class="works-video-caption"><span>演示视频</span><em>16:9 · MP4 / WebM</em></p>
-                </aside>
-              </div>
-            </article>
-            <article class="works-project gamejam-project is-media-left" id="apocalypse-kitchen">
-              <header class="works-project-head">
-                <span>thatGamejam</span>
-                <h3>《末日厨房》</h3>
-              </header>
-
-              <div class="works-project-intro works-gamejam-layout">
-                <div class="works-project-copy">
-                  <h4>作品简介</h4>
-                  <p>末日厨房是一款在世界末日来临前烹饪美食的多结局探索游戏！你将扮演一位失忆的厨师，在夜晚穿越森林，通过各种有趣的事件收集食材，然后在白天将它们变成可口的食物——或是变成焦炭，搞砸这一切。做出更好的食物，解锁日记与菜谱！当末日最终降临时，你的归宿又将是……？</p>
-                  <div class="works-resource-list" aria-label="《末日厨房》项目信息">
-                    <span><b>演示视频</b><a href="https://www.bilibili.com/video/BV1wtW46GE5D/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《末日厨房》演示视频">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="huiguang-detail" aria-label="查看《回光》简介">《回光》</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1GLnv6kEtd/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《回光》演示">B 站 <span aria-hidden="true">↗</span></a>
                 </div>
-                <div class="works-gamejam-media">
-                  <div class="works-project-video bilibili-video" data-bvid="BV1wtW46GE5D" data-video-title="【thatgamejam】世界末日来临，食至今日先吃饭吧！">
-                    <div class="bilibili-poster poster-apocalypse-kitchen" aria-hidden="true"><span>末日厨房</span></div>
-                    <button class="bilibili-video-trigger" type="button" aria-label="播放《末日厨房》演示视频"><i aria-hidden="true">▶</i><b>播放演示视频</b></button>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="works-project gamejam-project is-media-right" id="akashic-pilgrimage">
-              <header class="works-project-head">
-                <h3>《阿卡夏启示录：愚者的朝圣》</h3>
-              </header>
-
-              <div class="works-project-intro works-gamejam-layout">
-                <div class="works-project-copy">
-                  <p>独立游戏制作愚人的朝圣Demo</p>
-                  <div class="works-resource-list" aria-label="《阿卡夏启示录：愚者的朝圣》项目信息">
-                    <span><b>演示视频</b><a href="https://www.bilibili.com/video/BV1YHhq6rEii/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《阿卡夏启示录：愚者的朝圣》演示视频">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
-                </div>
-                <div class="works-gamejam-media">
-                  <div class="works-project-video bilibili-video" data-bvid="BV1YHhq6rEii" data-video-title="独立游戏制作愚人的朝圣Demo">
-                    <div class="bilibili-poster poster-akashic-pilgrimage" aria-hidden="true"><span>阿卡夏启示录<br>愚者的朝圣</span></div>
-                    <button class="bilibili-video-trigger" type="button" aria-label="播放《阿卡夏启示录：愚者的朝圣》演示视频"><i aria-hidden="true">▶</i><b>播放演示视频</b></button>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="works-project gamejam-project is-media-left" id="huiguang">
-              <header class="works-project-head">
-                <span>聚光灯 GJ</span>
-                <h3>《回光》</h3>
-              </header>
-
-              <div class="works-project-intro works-gamejam-layout">
-                <div class="works-project-copy">
-                  <h4>作品简介</h4>
+                <div class="works-card-detail" id="huiguang-detail" popover role="region" aria-labelledby="huiguang-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="huiguang-detail-title">《回光》简介</h4>
+                    <button type="button" popovertarget="huiguang-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">2D 叙事解谜</p>
+                  <p class="works-card-detail-event">聚光灯 GJ</p>
                   <p>《回光》是一款2D叙事解谜游戏。</p>
                   <p>在复杂神秘的中世纪，一位修道院院长曾因“争权篡位、残害手足”而被人唾弃。如今，她患上了一种奇怪的病——她的记忆开始破碎、神情开始迷蒙……</p>
                   <p>现在的我们当然清楚，这是叫做阿尔兹海默的病症。但当时的人们却深信不疑：这是她作恶多端，所遭受的来自上帝的惩罚。</p>
                   <p>她到底做了什么？世人眼中的真相，确实是她人生的全部吗？</p>
                   <p>在意识的混沌和遗忘之中，你将跟随她回忆的路线，去寻找、拼凑被罪名埋没的真相。</p>
                   <p>有些事，纵使记忆被时光消磨，也永不会被遗忘。</p>
-                  <div class="works-resource-list" aria-label="《回光》项目信息">
-                    <span><b>演示视频</b><a href="https://www.bilibili.com/video/BV1GLnv6kEtd/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《回光》演示视频">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
                 </div>
-                <div class="works-gamejam-media">
-                  <div class="works-project-video bilibili-video" data-bvid="BV1GLnv6kEtd" data-video-title="独游《回光》全流程demo展示-聚光灯GJ">
-                    <div class="bilibili-poster poster-huiguang" aria-hidden="true"><span>回光</span></div>
-                    <button class="bilibili-video-trigger" type="button" aria-label="播放《回光》演示视频"><i aria-hidden="true">▶</i><b>播放演示视频</b></button>
-                  </div>
+              </article>
+
+              <article class="works-card" id="mingwan-72-hours">
+                <div class="works-card-player bilibili-video" data-bvid="BV1s2tR6qEBJ" data-video-title="《明湾72小时》演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放《明湾72小时》演示视频"><i aria-hidden="true">▶</i></button>
                 </div>
-              </div>
-            </article>
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="mingwan-72-hours-detail" aria-label="查看《明湾72小时》简介">《明湾72小时》</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1s2tR6qEBJ/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看《明湾72小时》演示">B 站 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="works-card-detail" id="mingwan-72-hours-detail" popover role="region" aria-labelledby="mingwan-72-hours-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="mingwan-72-hours-detail-title">《明湾72小时》简介</h4>
+                    <button type="button" popovertarget="mingwan-72-hours-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">悬疑 · 推理 · 文字</p>
+                  <p class="works-card-detail-event">金海豚X好游快爆游戏开发大赛</p>
+                  <p>《明湾72h》是一款桌面模拟叙事解谜游戏。玩家化身智慧城市平台夜班质检员，在 72 小时内审阅 AI 工单、搜集证据并作出选择，逐步揭开“已解决”背后的系统真相。</p>
+                  <p>游戏背景设定在虚构智慧城市「明湾」，居民通过「明湾通」提交各类生活诉求，AI 先行处理，复杂案例则转交人工。然而系统给你的任务并不简单，随着夜班推进，你会逐渐发现，自己或许并非来帮居民伸张正义，而是来签字确认一场名为 AUTO-CLEAR 的历史异常清理——把无法分类的旧工单统统标记为「已解决」。</p>
+                  <p>游戏核心玩法围绕「后台工单处理模拟 + 证据推理 + 叙事选择」展开多分支叙事。十起彼此关联的居民事件、风险值与倒计时共同制造压力，玩家的查证、转人工或快速关单都会影响最终对峙与四种结局，并追问：系统停止回应，真的等于问题被解决了吗？</p>
+                  <a href="https://www.3839.com/a/200302.htm" target="_blank" rel="noopener noreferrer">查看作品页面 <span aria-hidden="true">↗</span></a>
+                </div>
+              </article>
+            </div>
           </section>
 
           <section class="works-category" id="school-work" data-toc>
@@ -264,68 +243,64 @@
               <h2>学校项目作品</h2>
             </header>
 
-            <article class="works-project school-project" id="sign-language-modeling">
-              <header class="works-project-head">
-                <span>AI · 3D MODELING · INTELLIGENT TRANSLATION</span>
-                <h3>三维手语建模</h3>
-              </header>
-
-              <div class="works-project-intro">
-                <div class="works-project-copy">
+            <div class="works-card-grid">
+              <article class="works-card" id="sign-language-modeling">
+                <div class="works-card-player bilibili-video" data-bvid="BV1R2p5e7ECE" data-video-title="三维手语建模演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放三维手语建模演示视频"><i aria-hidden="true">▶</i></button>
+                </div>
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="sign-language-modeling-detail" aria-label="查看三维手语建模简介">三维手语建模</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1R2p5e7ECE/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看三维手语建模演示">B 站 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="works-card-detail" id="sign-language-modeling-detail" popover role="region" aria-labelledby="sign-language-modeling-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="sign-language-modeling-detail-title">三维手语建模简介</h4>
+                    <button type="button" popovertarget="sign-language-modeling-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">AI · 三维建模 · 手语翻译</p>
                   <p>AI 手语建模及智能翻译研发项目，围绕三维数字化建模与智能翻译方案进行设计和成果展示。</p>
-                  <div class="tag-row"><span>AI</span><span>三维建模</span><span>手语翻译</span><span>数字化</span></div>
-                  <div class="works-resource-list" aria-label="三维手语建模项目链接">
-                    <span><b>项目视频</b><a href="https://www.bilibili.com/video/BV1R2p5e7ECE/?share_source=copy_web" target="_blank" rel="noopener noreferrer">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
                 </div>
-                <div class="works-project-video bilibili-video" data-bvid="BV1R2p5e7ECE" data-video-title="三维手语建模项目视频" data-video-url="https://www.bilibili.com/video/BV1R2p5e7ECE/?share_source=copy_web" aria-label="三维手语建模项目视频">
-                  <div class="bilibili-poster poster-sign-language" role="img" aria-label="三维手语建模项目视频封面"><span>三维手语建模</span><small>AI TRANSLATION / VIDEO</small></div>
-                  <button class="bilibili-video-trigger" type="button"><i>▶</i><b>悬浮预览 · 点击播放</b><small>PROJECT VIDEO / BILIBILI</small></button>
+              </article>
+
+              <article class="works-card" id="vr-home-tour">
+                <div class="works-card-player bilibili-video" data-bvid="BV1mG3jzBEtc" data-video-title="VR 家居漫游演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放VR 家居漫游演示视频"><i aria-hidden="true">▶</i></button>
                 </div>
-              </div>
-            </article>
-
-            <article class="works-project school-project" id="vr-home-tour">
-              <header class="works-project-head">
-                <span>VR · IMMERSIVE TOUR · HOME SIMULATION</span>
-                <h3>VR 家居漫游</h3>
-              </header>
-
-              <div class="works-project-intro">
-                <div class="works-project-copy">
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="vr-home-tour-detail" aria-label="查看VR 家居漫游简介">VR 家居漫游</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1mG3jzBEtc/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看VR 家居漫游演示">B 站 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="works-card-detail" id="vr-home-tour-detail" popover role="region" aria-labelledby="vr-home-tour-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="vr-home-tour-detail-title">VR 家居漫游简介</h4>
+                    <button type="button" popovertarget="vr-home-tour-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">VR · 沉浸式漫游</p>
                   <p>HomeSim「生活创想空间」项目，以家居空间为主题进行 VR 沉浸式漫游设计与项目展示。</p>
-                  <div class="tag-row"><span>VR</span><span>家居空间</span><span>沉浸式漫游</span><span>HomeSim</span></div>
-                  <div class="works-resource-list" aria-label="VR 家居漫游项目链接">
-                    <span><b>项目视频</b><a href="https://www.bilibili.com/video/BV1mG3jzBEtc/?share_source=copy_web" target="_blank" rel="noopener noreferrer">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
                 </div>
-                <div class="works-project-video bilibili-video" data-bvid="BV1mG3jzBEtc" data-video-title="VR 家居漫游项目视频" data-video-url="https://www.bilibili.com/video/BV1mG3jzBEtc/?share_source=copy_web" aria-label="VR 家居漫游项目视频">
-                  <div class="bilibili-poster poster-vr-home" role="img" aria-label="VR 家居漫游项目视频封面"><span>VR 家居漫游</span><small>IMMERSIVE TOUR / VIDEO</small></div>
-                  <button class="bilibili-video-trigger" type="button"><i>▶</i><b>悬浮预览 · 点击播放</b><small>PROJECT VIDEO / BILIBILI</small></button>
+              </article>
+
+              <article class="works-card" id="gaussian-splatting">
+                <div class="works-card-player bilibili-video" data-bvid="BV1f2hqzeEae" data-video-title="3D 高斯泼溅的运用演示视频" data-video-click-only>
+                  <div class="bilibili-poster" aria-hidden="true"></div>
+                  <button class="bilibili-video-trigger" type="button" aria-label="播放3D 高斯泼溅的运用演示视频"><i aria-hidden="true">▶</i></button>
                 </div>
-              </div>
-            </article>
-
-            <article class="works-project school-project" id="gaussian-splatting">
-              <header class="works-project-head">
-                <span>3D GAUSSIAN SPLATTING · RECONSTRUCTION · VISUALIZATION</span>
-                <h3>3D 高斯泼溅的运用</h3>
-              </header>
-
-              <div class="works-project-intro">
-                <div class="works-project-copy">
+                <div class="works-card-info">
+                  <h3><button type="button" popovertarget="gaussian-splatting-detail" aria-label="查看3D 高斯泼溅的运用简介">3D 高斯泼溅的运用</button></h3>
+                  <a class="works-card-video" href="https://www.bilibili.com/video/BV1f2hqzeEae/" target="_blank" rel="noopener noreferrer" aria-label="在 Bilibili 观看3D 高斯泼溅的运用演示">B 站 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="works-card-detail" id="gaussian-splatting-detail" popover role="region" aria-labelledby="gaussian-splatting-detail-title">
+                  <header class="works-card-detail-head">
+                    <h4 id="gaussian-splatting-detail-title">3D 高斯泼溅的运用简介</h4>
+                    <button type="button" popovertarget="gaussian-splatting-detail" popovertargetaction="hide" aria-label="关闭简介">×</button>
+                  </header>
+                  <p class="works-card-type">三维重建 · 可视化</p>
                   <p>全国三维建模大赛项目，围绕 3D Gaussian Splatting 在三维建模与场景可视化中的运用进行成果展示。</p>
-                  <div class="tag-row"><span>3DGS</span><span>高斯泼溅</span><span>三维重建</span><span>可视化</span></div>
-                  <div class="works-resource-list" aria-label="3D 高斯泼溅项目链接">
-                    <span><b>项目视频</b><a href="https://www.bilibili.com/video/BV1f2hqzeEae/?share_source=copy_web" target="_blank" rel="noopener noreferrer">前往 Bilibili <i aria-hidden="true">↗</i></a></span>
-                  </div>
                 </div>
-                <div class="works-project-video bilibili-video" data-bvid="BV1f2hqzeEae" data-video-title="3D 高斯泼溅运用项目视频" data-video-url="https://www.bilibili.com/video/BV1f2hqzeEae/?share_source=copy_web" aria-label="3D 高斯泼溅运用项目视频">
-                  <div class="bilibili-poster poster-gaussian" role="img" aria-label="3D 高斯泼溅运用项目视频封面"><span>3D 高斯泼溅</span><small>RECONSTRUCTION / VIDEO</small></div>
-                  <button class="bilibili-video-trigger" type="button"><i>▶</i><b>悬浮预览 · 点击播放</b><small>PROJECT VIDEO / BILIBILI</small></button>
-                </div>
-              </div>
-            </article>
+              </article>
+            </div>
           </section>
 
           <section class="works-category" id="lab-work" data-toc>
@@ -428,7 +403,6 @@
     <a data-nav="works" href="works.html"><span>◇</span>作品</a>
     <a data-nav="experience" href="index.html#internship"><span>⌁</span>经历</a>
     <a data-nav="about" href="about.html"><span>○</span>关于</a>
-    <a data-nav="resume" href="resume.html"><span>↓</span>简历</a>
   </nav>
 </body>
 </html>

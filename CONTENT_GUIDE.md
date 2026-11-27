@@ -13,7 +13,6 @@
 | DOTS 详情图 2 | `assets/images/projects/dots/detail-02.svg` | 16:9 |
 | DOTS 详情图 3 | `assets/images/projects/dots/detail-03.svg` | 16:9 |
 | 视频封面 | `assets/images/projects/dots/video-poster.svg` | 16:9 |
-| 正式简历 | `assets/resume/resume.pdf` | PDF |
 | DOTS 演示视频 | `assets/videos/dots-demo.mp4` | MP4 / H.264 |
 | 首屏背景视频 | `assets/videos/hero-loop.mp4` | 16:9、静音循环 |
 
@@ -23,10 +22,14 @@ SVG 占位图改成 JPG、PNG 或 WebP 时，需要同时修改 HTML 中相应�
 
 ## 增加新项目
 
+在 `works.html` 对应的 GameJam 或学校项目区复制一个 `.works-card`，更新作品名、简介和类型。用同一个 B 站视频更新播放器的 `data-bvid` 和卡片底部的直达链接，并替换视频标题。卡片 ID、简介弹窗 ID、标题 ID 需要各自唯一，弹窗的 `popovertarget` 和 `aria-labelledby` 需要指向对应 ID。
+
+如果项目需要单独的详情页，可以按下列步骤添加。
+
 1. 复制 `project-dots.html`，例如命名为 `project-new-game.html`。
 2. 在 `assets/images/projects/` 下新建项目文件夹。
 3. 替换详情页中的标题、简介、职责、方案、结果和图片路径。
-4. 在 `works.html` 中复制一个 `.project-card`，将链接指向新详情页。
+4. 在简介弹窗里增加指向新详情页的链接。
 
 ## 替换本地视频
 
@@ -37,14 +40,6 @@ SVG 占位图改成 JPG、PNG 或 WebP 时，需要同时修改 HTML 中相应�
   <div class="bilibili-poster poster-dots">...</div>
   <button class="bilibili-video-trigger" type="button">悬浮预览 · 点击播放</button>
 </div>
-```
-
-## 启用正式简历下载
-
-把 PDF 放到 `assets/resume/resume.pdf` 后，在 `resume.html` 中将“正式 PDF 待上传”的 `span` 替换为：
-
-```html
-<a class="button primary" href="assets/resume/resume.pdf" download>下载正式简历</a>
 ```
 
 ## 使用 Bilibili
